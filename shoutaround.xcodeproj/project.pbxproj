@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		819FED8975543F63859E78DE /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */; };
+		A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547ABCA1D382D18001C7816 /* LoginViewController.swift */; };
 		A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA3C1D36A34800960BC4 /* AppDelegate.swift */; };
 		A552DA3F1D36A34800960BC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA3E1D36A34800960BC4 /* ViewController.swift */; };
 		A552DA421D36A34800960BC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A552DA401D36A34800960BC4 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
 		A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shoutaround-Bridging-Header.h"; sourceTree = "<group>"; };
+		A547ABCA1D382D18001C7816 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A552DA391D36A34800960BC4 /* shoutaround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shoutaround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A552DA3C1D36A34800960BC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A552DA3E1D36A34800960BC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */,
 				A552DA3C1D36A34800960BC4 /* AppDelegate.swift */,
 				A552DA3E1D36A34800960BC4 /* ViewController.swift */,
+				A547ABCA1D382D18001C7816 /* LoginViewController.swift */,
 				A552DA401D36A34800960BC4 /* Main.storyboard */,
 				A552DA431D36A34800960BC4 /* Assets.xcassets */,
 				A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */,
@@ -333,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
 				A552DA3F1D36A34800960BC4 /* ViewController.swift in Sources */,
 				A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */,
 			);
@@ -478,6 +482,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = shoutaround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = Shoutaround.shoutaround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "shoutaround/shoutaround-Bridging-Header.h";
@@ -493,6 +498,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = shoutaround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = Shoutaround.shoutaround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "shoutaround/shoutaround-Bridging-Header.h";
