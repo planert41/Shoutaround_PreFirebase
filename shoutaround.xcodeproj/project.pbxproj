@@ -37,6 +37,7 @@
 /* Begin PBXFileReference section */
 		0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
+		A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shoutaround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A552DA391D36A34800960BC4 /* shoutaround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shoutaround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A552DA3C1D36A34800960BC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A552DA3E1D36A34800960BC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		A552DA3B1D36A34800960BC4 /* shoutaround */ = {
 			isa = PBXGroup;
 			children = (
+				A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */,
 				A552DA3C1D36A34800960BC4 /* AppDelegate.swift */,
 				A552DA3E1D36A34800960BC4 /* ViewController.swift */,
 				A552DA401D36A34800960BC4 /* Main.storyboard */,
@@ -473,10 +475,13 @@
 			baseConfigurationReference = F50294B4A90B60CA78F78433 /* Pods-shoutaround.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = shoutaround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Shoutaround.shoutaround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "shoutaround/shoutaround-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -485,10 +490,12 @@
 			baseConfigurationReference = 8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = shoutaround/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Shoutaround.shoutaround;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "shoutaround/shoutaround-Bridging-Header.h";
 			};
 			name = Release;
 		};

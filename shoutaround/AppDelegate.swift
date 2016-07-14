@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import Parse
-import GoogleMaps
+//import GoogleMaps
+import ParseTwitterUtils
+import ParseFacebookUtilsV4
 
 
 @UIApplicationMain
@@ -20,11 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Enable storing and querying data from Local Datastore.
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
+        
         Parse.enableLocalDatastore()
+        PFUser.enableAutomaticUser()
         
         // ****************************************************************************
         // Uncomment and fill in with your Parse credentials:
         Parse.setApplicationId("kkycLlE6i0WZrP6UmVxzgYbOhqeWOjdNdjg9LKYb", clientKey: "kdug1zieGMD7POuaMhNdJUMy0pUV4AKvzyZaonqS")
+        PFTwitterUtils.initializeWithConsumerKey("h1CK2QRvFbsDgyACsqupv2Qwc", consumerSecret:"P8z122xrdXTyckX8Gm0PXu3ML4dnh3UnJW0EFMUx22xgTzMZrQ")
+        
+        
+            PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
+            
+            GMSServices.provideAPIKey("AIzaSyC0wqqVPlKruUL27WgvYeJo94YnIFAZcm8")
+
+        
+        
+        
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
@@ -32,9 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
         
-        PFUser.enableAutomaticUser()
-        
-        GMSServices.provideAPIKey("AIzaSyC0wqqVPlKruUL27WgvYeJo94YnIFAZcm8")
+
         //pub run bin/main.dart -k AIzaSyDKuGWkW65nl0WiaUMIFv4fGXri5v6SMFA -p 10000
         
         
@@ -142,6 +153,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
     //     return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
     // }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
 
 
     func applicationWillResignActive(application: UIApplication) {
@@ -160,6 +175,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {
