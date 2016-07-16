@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
             PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
             
-            GMSServices.provideAPIKey("AIzaSyC0wqqVPlKruUL27WgvYeJo94YnIFAZcm8")
+            GMSServices.provideAPIKey("AIzaSyAE5QuyIGFlUeaJmM7UkDd0Nf4plvaVKXY")
 
         
         
