@@ -8,6 +8,8 @@
 
 import Fusuma
 
+public var imageSelected: UIImage?
+
 class CameraViewController: UIViewController, FusumaDelegate {
     
     
@@ -15,20 +17,38 @@ class CameraViewController: UIViewController, FusumaDelegate {
         
         let fusuma = Fusuma()
         fusuma.delegate = self
+        
+        if imageSelected == nil {
+        self.presentViewController(fusuma, animated: true, completion: nil)
+        }
+    }
+    
+ /*
+    override func viewDidAppear(animated: Bool) {
+        
+        let fusuma = Fusuma()
+        fusuma.delegate = self
         self.presentViewController(fusuma, animated: true, completion: nil)
         
     }
-
+*/
     
     func fusumaImageSelected(image: UIImage) {
         
+       imageSelected = image
+        
         print("Image selected")
+        
+       // self.shouldPerformSegueWithIdentifier("uploadImageSegue", sender: self)
+
+        
     }
     
     // Return the image but called after is dismissed.
     func fusumaDismissedWithImage(image: UIImage) {
         
         print("Called just after FusumaViewController is dismissed.")
+
     }
     
     func fusumaVideoCompleted(withFileURL fileURL: NSURL) {

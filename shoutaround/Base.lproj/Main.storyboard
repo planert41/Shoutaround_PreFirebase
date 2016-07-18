@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--Start View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="vvL-js-DPO">
             <objects>
-                <viewController id="oq6-rq-SpJ" customClass="StartViewController" sceneMemberID="viewController">
+                <viewController id="oq6-rq-SpJ" customClass="CameraViewController" customModule="shoutaround" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Oa-9P-Ehe"/>
                         <viewControllerLayoutGuide type="bottom" id="qDP-lZ-b9p"/>
@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-129.5" y="91.5"/>
         </scene>
-        <!--Camera-->
+        <!--Upload View Controller-->
         <scene sceneID="Z9u-mq-5og">
             <objects>
-                <viewController id="3ct-7d-6IW" customClass="CameraViewController" customModule="shoutaround" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UploadViewController" title="Upload View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3ct-7d-6IW" customClass="UploadViewController" customModule="shoutaround" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TfY-7H-zfk"/>
                         <viewControllerLayoutGuide type="bottom" id="5hb-li-8c9"/>
@@ -38,13 +38,24 @@
                     <view key="view" contentMode="scaleToFill" id="w4H-EQ-1dw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B94-3a-OEh">
+                                <rect key="frame" x="7" y="72" width="185" height="151"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Camera" image="close.png" id="Qa9-bK-x39"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="zte-eZ-H8g"/>
+                    <navigationItem key="navigationItem" title="Upload" id="CeW-dk-hnX">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="8iW-dU-jdb"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="uploadImage" destination="B94-3a-OEh" id="Low-Bb-kqq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NAM-7Z-jR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="719.5" y="820.5"/>
+            <point key="canvasLocation" x="1620.5" y="832.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bOy-kv-72d">
@@ -64,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IOA-jt-4QE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="719.5" y="1547.5"/>
+            <point key="canvasLocation" x="719.5" y="1601.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AyY-CV-Azn">
@@ -98,7 +109,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="SR2-rM-7Lh" kind="relationship" relationship="viewControllers" id="6O7-aC-vwT"/>
-                        <segue destination="3ct-7d-6IW" kind="relationship" relationship="viewControllers" id="Gf1-1U-OMw"/>
+                        <segue destination="mfH-fX-oDe" kind="relationship" relationship="viewControllers" id="pHt-ap-V5X"/>
                         <segue destination="Rwo-Tv-Yr3" kind="relationship" relationship="viewControllers" id="R9n-Tr-fDn"/>
                     </connections>
                 </tabBarController>
@@ -106,8 +117,51 @@
             </objects>
             <point key="canvasLocation" x="308.5" y="91.5"/>
         </scene>
+        <!--CameraViewController-->
+        <scene sceneID="dcP-oL-76U">
+            <objects>
+                <viewController title="CameraViewController" id="mfH-fX-oDe" customClass="CameraViewController" customModule="shoutaround" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u7V-y7-q8n"/>
+                        <viewControllerLayoutGuide type="bottom" id="A7G-Bx-sJP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PZQ-dO-2Tp" customClass="Came">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Camera" image="camera" id="agb-St-Z6B"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="wpH-SC-gqe" kind="show" identifier="uploadImageSegue" id="EyU-F7-2DC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RfD-w1-3KQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="719.5" y="832.5"/>
+        </scene>
+        <!--Upload Nav Controller-->
+        <scene sceneID="Ut5-8R-9O8">
+            <objects>
+                <navigationController title="Upload Nav Controller" automaticallyAdjustsScrollViewInsets="NO" id="wpH-SC-gqe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Camera" image="camera" id="RBH-ei-8Fh"/>
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="trO-P6-Hzc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3ct-7d-6IW" kind="relationship" relationship="rootViewController" id="3SV-c2-eM1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gw9-eu-dhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158.5" y="832.5"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="close.png" width="12" height="12"/>
+        <image name="camera" width="20" height="20"/>
     </resources>
 </document>

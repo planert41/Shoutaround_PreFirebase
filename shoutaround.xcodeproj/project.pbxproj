@@ -31,7 +31,7 @@
 		A5C775231D3C2937001F4B1C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5C775131D3C2936001F4B1C /* Info.plist */; };
 		A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775241D3C29A3001F4B1C /* CameraViewController.swift */; };
 		A5C775271D3D304B001F4B1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775261D3D304B001F4B1C /* TabBarController.swift */; };
-		A5C775291D3D30FE001F4B1C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775281D3D30FE001F4B1C /* StartViewController.swift */; };
+		A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 		A5C775131D3C2936001F4B1C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5C775241D3C29A3001F4B1C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A5C775261D3D304B001F4B1C /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		A5C775281D3D30FE001F4B1C /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		F50294B4A90B60CA78F78433 /* Pods-shoutaround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,10 +162,10 @@
 			isa = PBXGroup;
 			children = (
 				A552DA3C1D36A34800960BC4 /* AppDelegate.swift */,
-				A5C775281D3D30FE001F4B1C /* StartViewController.swift */,
 				A547ABCA1D382D18001C7816 /* LoginViewController.swift */,
 				A5C775261D3D304B001F4B1C /* TabBarController.swift */,
 				A5C775241D3C29A3001F4B1C /* CameraViewController.swift */,
+				A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */,
 				A552DA401D36A34800960BC4 /* Main.storyboard */,
 				A552DA431D36A34800960BC4 /* Assets.xcassets */,
 				A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */,
@@ -424,13 +424,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */,
+				A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */,
 				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
 				A5C775161D3C2936001F4B1C /* FSAlbumView.swift in Sources */,
 				A5C775181D3C2936001F4B1C /* FSCameraView.swift in Sources */,
 				A5C7751A1D3C2936001F4B1C /* FSImageCropView.swift in Sources */,
 				A5C775221D3C2937001F4B1C /* Fusuma-dummy.m in Sources */,
 				A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */,
-				A5C775291D3D30FE001F4B1C /* StartViewController.swift in Sources */,
 				A5C7751B1D3C2936001F4B1C /* Fusuma.swift in Sources */,
 				A5C775271D3D304B001F4B1C /* TabBarController.swift in Sources */,
 				A5C775191D3C2936001F4B1C /* FSConstants.swift in Sources */,
