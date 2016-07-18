@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ****************************************************************************
         // Uncomment and fill in with your Parse credentials:
         Parse.setApplicationId("kkycLlE6i0WZrP6UmVxzgYbOhqeWOjdNdjg9LKYb", clientKey: "kdug1zieGMD7POuaMhNdJUMy0pUV4AKvzyZaonqS")
+        PFUser.logOut()        
+        
         PFTwitterUtils.initializeWithConsumerKey("h1CK2QRvFbsDgyACsqupv2Qwc", consumerSecret:"P8z122xrdXTyckX8Gm0PXu3ML4dnh3UnJW0EFMUx22xgTzMZrQ")
         
         

@@ -16,6 +16,8 @@ class LoginViewController : PFLogInViewController {
     var viewsToAnimate: [UIView!]!;
     var viewsFinalYPosition : [CGFloat]!;
     
+    let userdefault = NSUserDefaults.standardUserDefaults()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,10 @@ class LoginViewController : PFLogInViewController {
         // create an array of all the views we want to animate in when we launch
         // the screen
         viewsToAnimate = [self.logInView?.usernameField, self.logInView?.passwordField, self.logInView?.logInButton, self.logInView?.passwordForgottenButton, self.logInView?.facebookButton, self.logInView?.twitterButton, self.logInView?.signUpButton, self.logInView?.logo]
+
+        logInView?.usernameField!.text = userdefault.stringForKey("username")
+        
+        
         
     }
     

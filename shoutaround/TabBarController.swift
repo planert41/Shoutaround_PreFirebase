@@ -1,30 +1,28 @@
 //
-//  ViewController.swift
+//  TabBarController.swift
 //  shoutaround
 //
-//  Created by Wei Zou Ang on 7/13/16.
+//  Created by Wei Zou Ang on 7/18/16.
 //  Copyright © 2016 Wei Zou Ang. All rights reserved.
 //
 
-import UIKit
+//import Cocoa
+import Parse
 import ParseUI
 
+class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate {
 
-class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    let userdefault = NSUserDefaults.standardUserDefaults()
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+
+        /*
+        if userdefault.stringForKey("username") == nil {
+            userdefault.setObject(" ", forKey: "username")
+        }
+        */
+        
         if (PFUser.currentUser() == nil) {
             let loginViewController = LoginViewController()
             loginViewController.delegate = self
@@ -45,12 +43,16 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        userdefault.setObject(logInController.logInView?.usernameField?.text, forKey: "username")
         presentLoggedInAlert()
+        
     }
     
     func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        userdefault.setObject(signUpController.signUpView?.usernameField!.text, forKey: "username")
         presentLoggedInAlert()
+        
     }
     
     func presentLoggedInAlert() {
@@ -60,8 +62,8 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
         }
         alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-    }
-
-
+        
 }
+}
+
 
