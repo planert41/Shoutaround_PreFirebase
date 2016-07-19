@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         
         Parse.enableLocalDatastore()
-        PFUser.enableAutomaticUser()
+        //PFUser.enableAutomaticUser()
         
         // ****************************************************************************
         // Uncomment and fill in with your Parse credentials:

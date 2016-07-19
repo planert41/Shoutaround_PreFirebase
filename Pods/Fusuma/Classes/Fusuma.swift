@@ -110,7 +110,12 @@ public final class Fusuma: UIViewController, FSCameraViewDelegate, FSAlbumViewDe
     
     @IBAction func closeButtonPressed(sender: UIButton) {
 
+        
+        
+     //   let tabViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("TabBarController")
+     //   self.presentViewController(tabViewController, animated: true, completion: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     @IBAction func libraryButtonPressed(sender: UIButton) {
@@ -136,9 +141,13 @@ public final class Fusuma: UIViewController, FSCameraViewDelegate, FSAlbumViewDe
         
         delegate?.fusumaImageSelected(image)
         
+        // Wei Zou Changes
+        
         
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("UploadViewController")
         self.presentViewController(viewController, animated: false, completion: nil)
+        
+        //self.dismissViewControllerAnimated(true, completion: nil)
         
        // self.dismissViewControllerAnimated(true, completion: nil)
     }

@@ -14,13 +14,14 @@ class CameraViewController: UIViewController, FusumaDelegate {
     
     
     override func viewDidAppear(animated: Bool) {
-        
+       /*
         let fusuma = Fusuma()
         fusuma.delegate = self
         
         if imageSelected == nil {
         self.presentViewController(fusuma, animated: true, completion: nil)
         }
+*/
     }
     
  /*

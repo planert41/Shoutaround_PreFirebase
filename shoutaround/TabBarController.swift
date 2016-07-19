@@ -10,18 +10,25 @@
 import Parse
 import ParseUI
 
-class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate {
+public var LastTab = 0
 
-    let userdefault = NSUserDefaults.standardUserDefaults()
+class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITabBarControllerDelegate, FusumaDelegate {
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    // To save userdefaults
+    let userdefault = NSUserDefaults.standardUserDefaults()
 
-        /*
-        if userdefault.stringForKey("username") == nil {
-            userdefault.setObject(" ", forKey: "username")
-        }
-        */
+    // Storyboards
+    let HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController")
+    let SearchViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchViewController")
+    let CameraViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CameraViewController")
+    let BookmarkViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BookmarkViewController")
+    let ProfileViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ProfileViewController")
+    
+    /* Show Login before displaying Tab Bar */
+    override func viewDidLoad() {
+        
+        self.delegate = self
+        
         
         if (PFUser.currentUser() == nil) {
             let loginViewController = LoginViewController()
@@ -37,9 +44,46 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
             loginViewController.signUpController?.delegate = self
             self.presentViewController(loginViewController, animated: false, completion: nil)
         } else {
-            presentLoggedInAlert()
+            
+            
+            
+            //let controllers = [HomeViewController, SearchViewController, CameraViewController, BookmarkViewController, ProfileViewController]
+            //self.setViewControllers(controllers, animated: true)
+            
+
+            
+
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        if userdefault.stringForKey("username") == nil {
+            userdefault.setObject(" ", forKey: "username")
+        }
+
+        self.selectedIndex = LastTab
+
+
+    }
+    
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController)
+    {
+        // As Long as Camera isn't selected
+        if tabBarController.selectedIndex != 2 {
+            LastTab = tabBarController.selectedIndex
+            print(LastTab)
+        } else {
+            showFusuma()
+            self.selectedIndex = LastTab
+            
+        }
+        
+    }
+    
+    
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -64,6 +108,51 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
         self.presentViewController(alertController, animated: true, completion: nil)
         
 }
+    
+    func showFusuma() {
+        
+        let fusuma = Fusuma()
+        fusuma.delegate = self
+        
+        if imageSelected == nil {
+            self.presentViewController(fusuma, animated: true, completion: nil)
+        }
+
+    }
+    
+    
+    
+    func fusumaImageSelected(image: UIImage) {
+        
+        imageSelected = image
+        
+        print("Image selected")
+        
+        // self.shouldPerformSegueWithIdentifier("uploadImageSegue", sender: self)
+        
+        
+    }
+    
+    // Return the image but called after is dismissed.
+    func fusumaDismissedWithImage(image: UIImage) {
+        
+        print("Called just after FusumaViewController is dismissed.")
+        
+    }
+    
+    func fusumaVideoCompleted(withFileURL fileURL: NSURL) {
+        
+        print("Called just after a video has been selected.")
+    }
+    
+    // When camera roll is not authorized, this method is called.
+    func fusumaCameraRollUnauthorized() {
+        
+        print("Camera roll unauthorized")
+    }
+
+    
+    
 }
 
 

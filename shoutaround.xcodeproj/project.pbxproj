@@ -73,7 +73,7 @@
 		A5C775041D3C2936001F4B1C /* FSCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSCameraView.swift; path = Classes/FSCameraView.swift; sourceTree = "<group>"; };
 		A5C775051D3C2936001F4B1C /* FSConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSConstants.swift; path = Classes/FSConstants.swift; sourceTree = "<group>"; };
 		A5C775061D3C2936001F4B1C /* FSImageCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSImageCropView.swift; path = Classes/FSImageCropView.swift; sourceTree = "<group>"; };
-		A5C775071D3C2936001F4B1C /* Fusuma.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fusuma.swift; path = Classes/Fusuma.swift; sourceTree = "<group>"; };
+		A5C775071D3C2936001F4B1C /* Fusuma.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fusuma.swift; path = ../Pods/Fusuma/Classes/Fusuma.swift; sourceTree = "<group>"; };
 		A5C775081D3C2936001F4B1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Classes/Assets.xcassets; sourceTree = "<group>"; };
 		A5C775091D3C2936001F4B1C /* FSAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSAlbumView.xib; path = Classes/FSAlbumView.xib; sourceTree = "<group>"; };
 		A5C7750A1D3C2936001F4B1C /* FSAlbumViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSAlbumViewCell.xib; path = Classes/FSAlbumViewCell.xib; sourceTree = "<group>"; };
@@ -167,6 +167,7 @@
 				A5C775241D3C29A3001F4B1C /* CameraViewController.swift */,
 				A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */,
 				A552DA401D36A34800960BC4 /* Main.storyboard */,
+				A5C775071D3C2936001F4B1C /* Fusuma.swift */,
 				A552DA431D36A34800960BC4 /* Assets.xcassets */,
 				A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */,
 				A552DA481D36A34800960BC4 /* Info.plist */,
@@ -226,7 +227,6 @@
 				A5C775041D3C2936001F4B1C /* FSCameraView.swift */,
 				A5C775051D3C2936001F4B1C /* FSConstants.swift */,
 				A5C775061D3C2936001F4B1C /* FSImageCropView.swift */,
-				A5C775071D3C2936001F4B1C /* Fusuma.swift */,
 				A5C7750D1D3C2936001F4B1C /* Resources */,
 				A5C775141D3C2936001F4B1C /* Support Files */,
 			);
