@@ -77,7 +77,7 @@ public final class Fusuma: UIViewController, FSCameraViewDelegate, FSAlbumViewDe
         cameraButton.clipsToBounds  = true
         libraryButton.clipsToBounds = true
 
-        changeMode(Mode.Library)
+        changeMode(Mode.Camera)
         
         photoLibraryViewerContainer.addSubview(albumView)
         cameraShotContainer.addSubview(cameraView)

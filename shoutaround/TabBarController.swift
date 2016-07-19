@@ -64,8 +64,7 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
             userdefault.setObject(" ", forKey: "username")
         }
 
-        self.selectedIndex = LastTab
-
+        
 
     }
     
@@ -74,12 +73,13 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
         // As Long as Camera isn't selected
         if tabBarController.selectedIndex != 2 {
             LastTab = tabBarController.selectedIndex
-            print(LastTab)
+            
         } else {
             showFusuma()
             self.selectedIndex = LastTab
             
         }
+        print(self.selectedIndex)
         
     }
     
@@ -114,9 +114,8 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
         let fusuma = Fusuma()
         fusuma.delegate = self
         
-        if imageSelected == nil {
-            self.presentViewController(fusuma, animated: true, completion: nil)
-        }
+        self.presentViewController(fusuma, animated: true, completion: nil)
+        
 
     }
     
