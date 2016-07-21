@@ -9,10 +9,13 @@
 //import Cocoa
 import Parse
 import ParseUI
+import AssetsLibrary
 
 public var LastTab = 0
 
-class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITabBarControllerDelegate, FusumaDelegate {
+
+
+class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITabBarControllerDelegate {
     
     // To save userdefaults
     let userdefault = NSUserDefaults.standardUserDefaults()
@@ -20,12 +23,26 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
     // Storyboards
     let HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("HomeViewController")
     let SearchViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SearchViewController")
-    let CameraViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CameraViewController")
+    let UploadViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("UploadViewController")
     let BookmarkViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BookmarkViewController")
     let ProfileViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ProfileViewController")
     
+    
     /* Show Login before displaying Tab Bar */
     override func viewDidLoad() {
+        let controllers = [HomeViewController, BookmarkViewController, UploadViewController, SearchViewController, ProfileViewController]
+        self.setViewControllers(controllers, animated: true)
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        if userdefault.stringForKey("username") == nil {
+            userdefault.setObject(" ", forKey: "username")
+        }
+
         
         self.delegate = self
         
@@ -44,29 +61,10 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
             loginViewController.signUpController?.delegate = self
             self.presentViewController(loginViewController, animated: false, completion: nil)
         } else {
-            
-            
-            
-            //let controllers = [HomeViewController, SearchViewController, CameraViewController, BookmarkViewController, ProfileViewController]
-            //self.setViewControllers(controllers, animated: true)
-            
-
-            
-
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-        if userdefault.stringForKey("username") == nil {
-            userdefault.setObject(" ", forKey: "username")
-        }
-
-        
-
-    }
+    // Shows Image Picker/Camera
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController)
     {
@@ -75,16 +73,13 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
             LastTab = tabBarController.selectedIndex
             
         } else {
-            showFusuma()
-            self.selectedIndex = LastTab
-            
+      
         }
-        print(self.selectedIndex)
-        
     }
     
+
     
-    
+
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         self.dismissViewControllerAnimated(true, completion: nil)
         userdefault.setObject(logInController.logInView?.usernameField?.text, forKey: "username")
@@ -109,17 +104,9 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
         
 }
     
-    func showFusuma() {
-        
-        let fusuma = Fusuma()
-        fusuma.delegate = self
-        
-        self.presentViewController(fusuma, animated: true, completion: nil)
-        
 
-    }
     
-    
+    /*
     
     func fusumaImageSelected(image: UIImage) {
         
@@ -150,7 +137,7 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
         print("Camera roll unauthorized")
     }
 
-    
+    */
     
 }
 

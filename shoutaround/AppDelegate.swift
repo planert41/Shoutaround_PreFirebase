@@ -23,12 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         
         Parse.enableLocalDatastore()
-        //PFUser.enableAutomaticUser()
+        PFUser.enableAutomaticUser()
         
         // ****************************************************************************
         // Uncomment and fill in with your Parse credentials:
         Parse.setApplicationId("kkycLlE6i0WZrP6UmVxzgYbOhqeWOjdNdjg9LKYb", clientKey: "kdug1zieGMD7POuaMhNdJUMy0pUV4AKvzyZaonqS")
-        PFUser.logOut()        
+        //PFUser.logOut()
         
         PFTwitterUtils.initializeWithConsumerKey("h1CK2QRvFbsDgyACsqupv2Qwc", consumerSecret:"P8z122xrdXTyckX8Gm0PXu3ML4dnh3UnJW0EFMUx22xgTzMZrQ")
         

@@ -9,10 +9,13 @@
 import UIKit
 import Photos
 
+
 protocol FSAlbumViewDelegate: class {
     
     func albumViewCameraRollUnauthorized()
 }
+
+public var LocationData: [CLLocation]?
 
 final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, PHPhotoLibraryChangeObserver, UIGestureRecognizerDelegate {
         
@@ -91,6 +94,20 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
             changeImage(images[0] as! PHAsset)
         }
         
+        
+        images.enumerateObjectsUsingBlock({
+            (obj, idx, bool) -> Void in
+            var asset = obj  as! PHAsset
+            
+            print(asset.location)
+            LocationData?.append(asset.location!)
+            
+        })
+        
+        print(LocationData?.count)
+        
+        
+
         collectionView.reloadData()
         
         PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
@@ -259,6 +276,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         cell.tag = currentTag
         
         let asset = self.images[indexPath.item] as! PHAsset
+
         self.imageManager.requestImageForAsset(asset,
             targetSize: cellSize,
             contentMode: .AspectFill,
@@ -306,6 +324,9 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
             }, completion: nil)
         
         dragDirection = Direction.Up
+        
+
+        
     }
     
     // Check the status of authorization for PHPhotoLibrary

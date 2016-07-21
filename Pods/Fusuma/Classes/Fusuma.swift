@@ -77,13 +77,22 @@ public final class Fusuma: UIViewController, FSCameraViewDelegate, FSAlbumViewDe
         cameraButton.clipsToBounds  = true
         libraryButton.clipsToBounds = true
 
-        changeMode(Mode.Camera)
+        changeMode(Mode.Library)
         
         photoLibraryViewerContainer.addSubview(albumView)
         cameraShotContainer.addSubview(cameraView)
         
         doneButton.setImage(UIImage(named: "ic_check"), forState: .Normal)
-        doneButton.tintColor = UIColor.whiteColor()        
+        doneButton.tintColor = UIColor.whiteColor()
+        
+        // Wei's Changes
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("doneButtonPressedFunction"))
+        tap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(tap)
+        
+        
+        
     }
     
     override public func viewWillAppear(animated: Bool) {
@@ -130,6 +139,13 @@ public final class Fusuma: UIViewController, FSCameraViewDelegate, FSAlbumViewDe
     
     @IBAction func doneButtonPressed(sender: UIButton) {
         
+        doneButtonPressedFunction()
+        
+    }
+    
+    func doneButtonPressedFunction() {
+        
+        
         let view = albumView.imageCropView
         
         UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
@@ -143,14 +159,11 @@ public final class Fusuma: UIViewController, FSCameraViewDelegate, FSAlbumViewDe
         
         // Wei Zou Changes
         
-        
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("UploadViewController")
         self.presentViewController(viewController, animated: false, completion: nil)
         
-        //self.dismissViewControllerAnimated(true, completion: nil)
-        
-       // self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     func changeMode(mode: Mode) {
 
