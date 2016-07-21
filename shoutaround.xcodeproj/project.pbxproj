@@ -17,6 +17,8 @@
 		A552DA521D36A34800960BC4 /* shoutaroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA511D36A34800960BC4 /* shoutaroundTests.swift */; };
 		A552DA5D1D36A34800960BC4 /* shoutaroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA5C1D36A34800960BC4 /* shoutaroundUITests.swift */; };
 		A5662F221D3EEFBA00210F83 /* navigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5662F211D3EEFBA00210F83 /* navigationBar.swift */; };
+		A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */; };
+		A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */; };
 		A5C775161D3C2936001F4B1C /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775021D3C2936001F4B1C /* FSAlbumView.swift */; };
 		A5C775171D3C2936001F4B1C /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775031D3C2936001F4B1C /* FSAlbumViewCell.swift */; };
 		A5C775181D3C2936001F4B1C /* FSCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775041D3C2936001F4B1C /* FSCameraView.swift */; };
@@ -73,6 +75,8 @@
 		A552DA5C1D36A34800960BC4 /* shoutaroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shoutaroundUITests.swift; sourceTree = "<group>"; };
 		A552DA5E1D36A34800960BC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5662F211D3EEFBA00210F83 /* navigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = navigationBar.swift; sourceTree = "<group>"; };
+		A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
+		A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		A5C775021D3C2936001F4B1C /* FSAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSAlbumView.swift; path = Classes/FSAlbumView.swift; sourceTree = "<group>"; };
 		A5C775031D3C2936001F4B1C /* FSAlbumViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSAlbumViewCell.swift; path = Classes/FSAlbumViewCell.swift; sourceTree = "<group>"; };
 		A5C775041D3C2936001F4B1C /* FSCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSCameraView.swift; path = Classes/FSCameraView.swift; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */,
 				A552DA481D36A34800960BC4 /* Info.plist */,
 				A5C775241D3C29A3001F4B1C /* CameraViewController.swift */,
+				A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */,
+				A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */,
 			);
 			path = shoutaround;
 			sourceTree = "<group>";
@@ -433,8 +439,10 @@
 			files = (
 				A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */,
 				A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */,
+				A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */,
 				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
 				A5C775161D3C2936001F4B1C /* FSAlbumView.swift in Sources */,
+				A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */,
 				A5662F221D3EEFBA00210F83 /* navigationBar.swift in Sources */,
 				A5C775181D3C2936001F4B1C /* FSCameraView.swift in Sources */,
 				A5C7751A1D3C2936001F4B1C /* FSImageCropView.swift in Sources */,
