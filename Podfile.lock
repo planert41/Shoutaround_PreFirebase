@@ -10,7 +10,6 @@ PODS:
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.9.1):
     - FBSDKCoreKit
-  - Fusuma (0.1.8)
   - GoogleMaps (1.11.1)
   - Parse (1.12.0):
     - Bolts/Tasks (~> 1.5)
@@ -33,7 +32,6 @@ DEPENDENCIES:
   - Alamofire (~> 3.1.2)
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - Fusuma
   - GoogleMaps
   - Parse
   - ParseFacebookUtilsV4
@@ -56,7 +54,6 @@ SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
   FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
-  Fusuma: b50b970bc4f1ca53abfb3408e09250cc657b3579
   GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
   Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
   ParseFacebookUtilsV4: 216e03bd560404eed09a4875c75f0c1cdf758070
@@ -65,6 +62,6 @@ SPEC CHECKSUMS:
   SendGrid: d75e10f40d4d6a3301f6cb0dac77c12797b41db1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: f75530224e23a961662f4a934673d42a9e274333
+PODFILE CHECKSUM: 4df5c52b55816d1c82c02a8b4b2abacbbb6e470d
 
 COCOAPODS: 1.0.1

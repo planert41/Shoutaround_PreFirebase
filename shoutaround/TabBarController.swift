@@ -104,41 +104,6 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
         
 }
     
-
-    
-    /*
-    
-    func fusumaImageSelected(image: UIImage) {
-        
-        imageSelected = image
-        
-        print("Image selected")
-        
-        // self.shouldPerformSegueWithIdentifier("uploadImageSegue", sender: self)
-        
-        
-    }
-    
-    // Return the image but called after is dismissed.
-    func fusumaDismissedWithImage(image: UIImage) {
-        
-        print("Called just after FusumaViewController is dismissed.")
-        
-    }
-    
-    func fusumaVideoCompleted(withFileURL fileURL: NSURL) {
-        
-        print("Called just after a video has been selected.")
-    }
-    
-    // When camera roll is not authorized, this method is called.
-    func fusumaCameraRollUnauthorized() {
-        
-        print("Camera roll unauthorized")
-    }
-
-    */
-    
 }
 
 

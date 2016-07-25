@@ -6,22 +6,15 @@
 //  Copyright © 2016 Wei Zou Ang. All rights reserved.
 //
 
-import Fusuma
+
 
 public var imageSelected: UIImage?
 
-class CameraViewController: UIViewController, FusumaDelegate {
+class CameraViewController: UIViewController {
     
     
     override func viewDidAppear(animated: Bool) {
-       /*
-        let fusuma = Fusuma()
-        fusuma.delegate = self
-        
-        if imageSelected == nil {
-        self.presentViewController(fusuma, animated: true, completion: nil)
-        }
-*/
+
     }
     
  /*

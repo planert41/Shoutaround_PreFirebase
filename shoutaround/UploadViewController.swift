@@ -110,6 +110,8 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         //Location
         
+        reverseGPS(SelectedImageGPS!)        
+        
         var postLatitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.latitude)!)
         var postLongitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.longitude)!)
         
@@ -119,7 +121,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         locationView.layer.borderWidth = 1
         locationView.layer.borderColor = UIColor(red:222/255.0, green:225/255.0, blue:227/255.0, alpha: 1.0).CGColor
         
-        reverseGPS(SelectedImageGPS!)
+
         
         
     }
