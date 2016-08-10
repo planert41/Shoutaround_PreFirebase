@@ -9,6 +9,8 @@
 import UIKit
 import AssetsLibrary
 import GoogleMaps
+import Alamofire
+import SwiftyJSON
 
 
 public var SelectedImageGPS: CLLocation?
@@ -26,6 +28,9 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     // Photo and Location Manager
     let locationManager = CLLocationManager()
     let library = ALAssetsLibrary()
+    
+    var GooglePlacesID = ["":""]
+    var SearchResults = [""]
     
     override func viewDidLoad() {
 
@@ -55,7 +60,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         var image = UIImagePickerController()
         image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         image.delegate = self
-        image.allowsEditing = true
+        image.allowsEditing = false
         self.presentViewController(image, animated: true, completion: nil)
         
     }
@@ -110,7 +115,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         //Location
         
-        reverseGPS(SelectedImageGPS!)        
+        reverseGPS(SelectedImageGPS!)
         
         var postLatitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.latitude)!)
         var postLongitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.longitude)!)
@@ -166,18 +171,63 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         })
         
         let dataProvider = GoogleDataProvider()
-        let searchRadius: Double = 50
+        let searchRadius: Double = 100
         var searchedTypes = ["restaurant"]
+        var searchTerm = "restaurant"
         var mypos: CLLocationCoordinate2D = CLLocationCoordinate2DMake((SelectedImageGPS?.coordinate.latitude)!,(SelectedImageGPS?.coordinate.longitude)!)
         
         print(mypos)
         
         dataProvider.fetchPlacesNearCoordinate(mypos, radius:searchRadius, types: searchedTypes) { places in
             for place: GooglePlace in places {
-                print("test")
+                print(place.name)
                 
             }
         }
+        
+        downloadRestaurantDetails(mypos, searchRadius: searchRadius, searchType: searchTerm)
+        
+        
+    }
+    
+    func downloadRestaurantDetails(lat: CLLocationCoordinate2D, searchRadius:Double, searchType: String ) {
+        let URL_Search = "https://maps.googleapis.com/maps/api/place/search/json?"
+        let API_iOSKey = "AIzaSyBq2etZOLunPzzNt9rA52n3RKN-TKPLhec"
+        
+        let urlString = "\(URL_Search)location=\(lat.latitude),\(lat.longitude)&rankby=distance&type=\(searchType)&key=\(API_iOSKey)"
+        let url = NSURL(string: urlString)!
+        
+     //   https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670,151.1957&radius=500&types=food&name=cruise&key=YOUR_API_KEY
+        
+        // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.9542116666667,-87.7055883333333&radius=100.0&rankby=distance&type=restaurant&key=AIzaSyBq2etZOLunPzzNt9rA52n3RKN-TKPLhec
+        
+
+        
+        print(urlString)
+        self.SearchResults.removeAll()
+        self.GooglePlacesID.removeAll()
+        
+        Alamofire.request(.GET,url).responseJSON { (response) -> Void in
+            if let value  = response.result.value {
+                let json = JSON(value)
+                print(json)
+                
+                if let results = json["results"].array {
+                    for result in results {
+                        if let placeIDs = result["place_id"].string{
+                            if let names = result["name"].string{
+
+                        self.GooglePlacesID[names] = placeIDs
+                        self.SearchResults.append(names)
+                        }
+                    }
+                    }
+                }
+            }
+            
+                 print(self.SearchResults)
+        }
+
     }
     
     func displayLocationInfo(placemark: CLPlacemark?) {

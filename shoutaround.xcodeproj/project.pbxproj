@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		819FED8975543F63859E78DE /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */; };
+		A53FC8EF1D46A54900C05874 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53FC8EE1D46A54900C05874 /* Dictionary.swift */; };
 		A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547ABCA1D382D18001C7816 /* LoginViewController.swift */; };
 		A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA3C1D36A34800960BC4 /* AppDelegate.swift */; };
 		A552DA421D36A34800960BC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A552DA401D36A34800960BC4 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
+		A53FC8EE1D46A54900C05874 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "shoutaround-Bridging-Header.h"; path = "shoutaround/shoutaround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A547ABCA1D382D18001C7816 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A552DA391D36A34800960BC4 /* shoutaround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shoutaround.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 				A547ABCA1D382D18001C7816 /* LoginViewController.swift */,
 				A5C775261D3D304B001F4B1C /* TabBarController.swift */,
 				A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */,
+				A53FC8EE1D46A54900C05874 /* Dictionary.swift */,
 				A552DA401D36A34800960BC4 /* Main.storyboard */,
 				A5662F211D3EEFBA00210F83 /* navigationBar.swift */,
 				A552DA431D36A34800960BC4 /* Assets.xcassets */,
@@ -356,6 +359,7 @@
 				A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */,
 				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
 				A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */,
+				A53FC8EF1D46A54900C05874 /* Dictionary.swift in Sources */,
 				A5662F221D3EEFBA00210F83 /* navigationBar.swift in Sources */,
 				A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */,
 				A5C775271D3D304B001F4B1C /* TabBarController.swift in Sources */,
