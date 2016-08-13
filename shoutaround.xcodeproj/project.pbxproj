@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31B81BD7556AEDEC1FF9A272 /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81FE16807727606856F904A /* Pods_shoutaround.framework */; };
 		819FED8975543F63859E78DE /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */; };
 		A53FC8EF1D46A54900C05874 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53FC8EE1D46A54900C05874 /* Dictionary.swift */; };
 		A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547ABCA1D382D18001C7816 /* LoginViewController.swift */; };
@@ -17,6 +18,9 @@
 		A552DA521D36A34800960BC4 /* shoutaroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA511D36A34800960BC4 /* shoutaroundTests.swift */; };
 		A552DA5D1D36A34800960BC4 /* shoutaroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA5C1D36A34800960BC4 /* shoutaroundUITests.swift */; };
 		A5662F221D3EEFBA00210F83 /* navigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5662F211D3EEFBA00210F83 /* navigationBar.swift */; };
+		A5AC5F1C1D5BD7B70032B049 /* uploadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F1B1D5BD7B70032B049 /* uploadCollectionViewCell.swift */; };
+		A5AC5F1F1D5F4A240032B049 /* UploadLocationTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F1E1D5F4A240032B049 /* UploadLocationTagList.swift */; };
+		A5AC5F281D5F4CB20032B049 /* LocationTagButtonClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F271D5F4CB20032B049 /* LocationTagButtonClass.swift */; };
 		A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */; };
 		A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */; };
 		A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775241D3C29A3001F4B1C /* CameraViewController.swift */; };
@@ -43,8 +47,9 @@
 
 /* Begin PBXFileReference section */
 		0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80E513EF2B5A319F0470F7B5 /* Pods-shoutaround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.debug.xcconfig"; sourceTree = "<group>"; };
 		8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
-		A53FC8EE1D46A54900C05874 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		A53FC8EE1D46A54900C05874 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = shoutaround/Dictionary.swift; sourceTree = "<group>"; };
 		A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "shoutaround-Bridging-Header.h"; path = "shoutaround/shoutaround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A547ABCA1D382D18001C7816 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A552DA391D36A34800960BC4 /* shoutaround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shoutaround.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,11 +65,16 @@
 		A552DA5C1D36A34800960BC4 /* shoutaroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shoutaroundUITests.swift; sourceTree = "<group>"; };
 		A552DA5E1D36A34800960BC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5662F211D3EEFBA00210F83 /* navigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = navigationBar.swift; sourceTree = "<group>"; };
-		A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
-		A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
-		A5C775241D3C29A3001F4B1C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		A5AC5F1B1D5BD7B70032B049 /* uploadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = uploadCollectionViewCell.swift; path = shoutaround/uploadCollectionViewCell.swift; sourceTree = "<group>"; };
+		A5AC5F1E1D5F4A240032B049 /* UploadLocationTagList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadLocationTagList.swift; sourceTree = "<group>"; };
+		A5AC5F271D5F4CB20032B049 /* LocationTagButtonClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTagButtonClass.swift; sourceTree = "<group>"; };
+		A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GooglePlace.swift; path = shoutaround/GooglePlace.swift; sourceTree = "<group>"; };
+		A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleDataProvider.swift; path = shoutaround/GoogleDataProvider.swift; sourceTree = "<group>"; };
+		A5C775241D3C29A3001F4B1C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = shoutaround/CameraViewController.swift; sourceTree = "<group>"; };
 		A5C775261D3D304B001F4B1C /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		D65054FC5CDA699EF7FFB398 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
+		D81FE16807727606856F904A /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50294B4A90B60CA78F78433 /* Pods-shoutaround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				819FED8975543F63859E78DE /* Pods_shoutaround.framework in Frameworks */,
+				31B81BD7556AEDEC1FF9A272 /* Pods_shoutaround.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,12 +126,14 @@
 		A552DA301D36A34800960BC4 = {
 			isa = PBXGroup;
 			children = (
+				A5AC5F261D5F4B890032B049 /* CollectionViewLayout */,
+				A5AC5F241D5F4ADE0032B049 /* Classes */,
+				A5AC5F231D5F4ACA0032B049 /* Dictionary */,
+				A5AC5F211D5F4AAB0032B049 /* ViewCells */,
 				A552DA3B1D36A34800960BC4 /* shoutaround */,
-				A552DA501D36A34800960BC4 /* shoutaroundTests */,
-				A552DA5B1D36A34800960BC4 /* shoutaroundUITests */,
-				A552DA3A1D36A34800960BC4 /* Products */,
-				762240F18BA751BB616F44BE /* Pods */,
-				381D16A2DF05B835DEDF545E /* Frameworks */,
+				A5AC5F251D5F4B330032B049 /* Other */,
+				BCF0AB65D3D84E3CAF0885B5 /* Pods */,
+				E16654D54528BE6658854C37 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,19 +150,14 @@
 		A552DA3B1D36A34800960BC4 /* shoutaround */ = {
 			isa = PBXGroup;
 			children = (
+				A5AC5F1D1D5F48650032B049 /* Storyboards */,
 				A552DA3C1D36A34800960BC4 /* AppDelegate.swift */,
 				A547ABCA1D382D18001C7816 /* LoginViewController.swift */,
 				A5C775261D3D304B001F4B1C /* TabBarController.swift */,
 				A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */,
-				A53FC8EE1D46A54900C05874 /* Dictionary.swift */,
-				A552DA401D36A34800960BC4 /* Main.storyboard */,
 				A5662F211D3EEFBA00210F83 /* navigationBar.swift */,
 				A552DA431D36A34800960BC4 /* Assets.xcassets */,
-				A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */,
 				A552DA481D36A34800960BC4 /* Info.plist */,
-				A5C775241D3C29A3001F4B1C /* CameraViewController.swift */,
-				A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */,
-				A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */,
 			);
 			path = shoutaround;
 			sourceTree = "<group>";
@@ -170,6 +178,80 @@
 				A552DA5E1D36A34800960BC4 /* Info.plist */,
 			);
 			path = shoutaroundUITests;
+			sourceTree = "<group>";
+		};
+		A5AC5F1D1D5F48650032B049 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A552DA401D36A34800960BC4 /* Main.storyboard */,
+				A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A5AC5F211D5F4AAB0032B049 /* ViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A5AC5F1B1D5BD7B70032B049 /* uploadCollectionViewCell.swift */,
+			);
+			name = ViewCells;
+			sourceTree = "<group>";
+		};
+		A5AC5F231D5F4ACA0032B049 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				A53FC8EE1D46A54900C05874 /* Dictionary.swift */,
+			);
+			name = Dictionary;
+			sourceTree = "<group>";
+		};
+		A5AC5F241D5F4ADE0032B049 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A5AC5F271D5F4CB20032B049 /* LocationTagButtonClass.swift */,
+				A5C775241D3C29A3001F4B1C /* CameraViewController.swift */,
+				A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */,
+				A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		A5AC5F251D5F4B330032B049 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				A552DA501D36A34800960BC4 /* shoutaroundTests */,
+				A552DA5B1D36A34800960BC4 /* shoutaroundUITests */,
+				A552DA3A1D36A34800960BC4 /* Products */,
+				762240F18BA751BB616F44BE /* Pods */,
+				381D16A2DF05B835DEDF545E /* Frameworks */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		A5AC5F261D5F4B890032B049 /* CollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A5AC5F1E1D5F4A240032B049 /* UploadLocationTagList.swift */,
+			);
+			name = CollectionViewLayout;
+			sourceTree = "<group>";
+		};
+		BCF0AB65D3D84E3CAF0885B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				80E513EF2B5A319F0470F7B5 /* Pods-shoutaround.debug.xcconfig */,
+				D65054FC5CDA699EF7FFB398 /* Pods-shoutaround.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E16654D54528BE6658854C37 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D81FE16807727606856F904A /* Pods_shoutaround.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,13 +438,16 @@
 			files = (
 				A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */,
 				A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */,
+				A5AC5F281D5F4CB20032B049 /* LocationTagButtonClass.swift in Sources */,
 				A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */,
 				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
 				A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */,
 				A53FC8EF1D46A54900C05874 /* Dictionary.swift in Sources */,
 				A5662F221D3EEFBA00210F83 /* navigationBar.swift in Sources */,
+				A5AC5F1F1D5F4A240032B049 /* UploadLocationTagList.swift in Sources */,
 				A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */,
 				A5C775271D3D304B001F4B1C /* TabBarController.swift in Sources */,
+				A5AC5F1C1D5BD7B70032B049 /* uploadCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +489,7 @@
 				A552DA411D36A34800960BC4 /* Base */,
 			);
 			name = Main.storyboard;
+			path = shoutaround;
 			sourceTree = "<group>";
 		};
 		A552DA451D36A34800960BC4 /* LaunchScreen.storyboard */ = {
@@ -412,6 +498,7 @@
 				A552DA461D36A34800960BC4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = shoutaround;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

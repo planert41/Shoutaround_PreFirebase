@@ -15,8 +15,10 @@ import SwiftyJSON
 
 public var SelectedImageGPS: CLLocation?
 public var SelectedImageData: UIImage?
+public var GooglePlacesID = ["":""]
+public var SearchResults = [String()]
 
-class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
 
     @IBOutlet weak var uploadImage: UIImageView!
     @IBOutlet weak var postCaption: UITextView!
@@ -24,16 +26,20 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var LocationIcon: UIImageView!
     @IBOutlet weak var locationView: UIView!
+    @IBOutlet weak var placesCollectionView: UICollectionView!
 
     // Photo and Location Manager
     let locationManager = CLLocationManager()
     let library = ALAssetsLibrary()
+    let UploadLocationTag = UploadLocationTagList()
     
-    var GooglePlacesID = ["":""]
-    var SearchResults = [""]
+
     
     override func viewDidLoad() {
 
+        placesCollectionView.delegate = self
+        placesCollectionView.setCollectionViewLayout(UploadLocationTag, animated: true)
+        
     }
     
     
@@ -201,32 +207,37 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.9542116666667,-87.7055883333333&radius=100.0&rankby=distance&type=restaurant&key=AIzaSyBq2etZOLunPzzNt9rA52n3RKN-TKPLhec
         
-
-        
-        print(urlString)
-        self.SearchResults.removeAll()
-        self.GooglePlacesID.removeAll()
+        var temp = [String()]
+        SearchResults.removeAll()
+        GooglePlacesID.removeAll()
+        temp.removeAll()
         
         Alamofire.request(.GET,url).responseJSON { (response) -> Void in
+
+            
             if let value  = response.result.value {
                 let json = JSON(value)
-                print(json)
                 
                 if let results = json["results"].array {
                     for result in results {
+                        if result["place_id"].string != nil {
                         if let placeIDs = result["place_id"].string{
                             if let names = result["name"].string{
 
-                        self.GooglePlacesID[names] = placeIDs
-                        self.SearchResults.append(names)
+                        GooglePlacesID[names] = placeIDs
+                        temp.append(names)
                         }
+                            }
                     }
                     }
                 }
             }
+            print(temp)
+            SearchResults = temp
+            self.placesCollectionView.reloadData()
             
-                 print(self.SearchResults)
         }
+
 
     }
     
@@ -274,5 +285,35 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
     }
 
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return SearchResults.count
+
+    }
+    
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        
+        
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
+        
+        cell.placeButtons.setTitle(SearchResults[(indexPath as NSIndexPath).row], forState: .Normal)
+        cell.UploadCellViewController = self
+        return cell
+    }
+    
+    
+    @IBAction func LocationPressed(sender: UIButton) {
+        locationLabel.text = sender.titleLabel?.text
+    
+        
+    }
+
+    
     
 }
