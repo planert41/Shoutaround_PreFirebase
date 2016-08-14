@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		31B81BD7556AEDEC1FF9A272 /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81FE16807727606856F904A /* Pods_shoutaround.framework */; };
 		819FED8975543F63859E78DE /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */; };
-		A53FC8EF1D46A54900C05874 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53FC8EE1D46A54900C05874 /* Dictionary.swift */; };
 		A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547ABCA1D382D18001C7816 /* LoginViewController.swift */; };
 		A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA3C1D36A34800960BC4 /* AppDelegate.swift */; };
 		A552DA421D36A34800960BC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A552DA401D36A34800960BC4 /* Main.storyboard */; };
@@ -21,8 +20,9 @@
 		A5AC5F1C1D5BD7B70032B049 /* uploadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F1B1D5BD7B70032B049 /* uploadCollectionViewCell.swift */; };
 		A5AC5F1F1D5F4A240032B049 /* UploadLocationTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F1E1D5F4A240032B049 /* UploadLocationTagList.swift */; };
 		A5AC5F281D5F4CB20032B049 /* LocationTagButtonClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F271D5F4CB20032B049 /* LocationTagButtonClass.swift */; };
-		A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */; };
-		A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */; };
+		A5AC5F361D6004BA0032B049 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F351D6004BA0032B049 /* Dictionary.swift */; };
+		A5AC5F391D6004CC0032B049 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F371D6004CC0032B049 /* GoogleDataProvider.swift */; };
+		A5AC5F3A1D6004CC0032B049 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F381D6004CC0032B049 /* GooglePlace.swift */; };
 		A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775241D3C29A3001F4B1C /* CameraViewController.swift */; };
 		A5C775271D3D304B001F4B1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775261D3D304B001F4B1C /* TabBarController.swift */; };
 		A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */; };
@@ -49,7 +49,6 @@
 		0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80E513EF2B5A319F0470F7B5 /* Pods-shoutaround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.debug.xcconfig"; sourceTree = "<group>"; };
 		8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
-		A53FC8EE1D46A54900C05874 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = shoutaround/Dictionary.swift; sourceTree = "<group>"; };
 		A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "shoutaround-Bridging-Header.h"; path = "shoutaround/shoutaround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A547ABCA1D382D18001C7816 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A552DA391D36A34800960BC4 /* shoutaround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shoutaround.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,8 +67,9 @@
 		A5AC5F1B1D5BD7B70032B049 /* uploadCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = uploadCollectionViewCell.swift; path = shoutaround/uploadCollectionViewCell.swift; sourceTree = "<group>"; };
 		A5AC5F1E1D5F4A240032B049 /* UploadLocationTagList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadLocationTagList.swift; sourceTree = "<group>"; };
 		A5AC5F271D5F4CB20032B049 /* LocationTagButtonClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTagButtonClass.swift; sourceTree = "<group>"; };
-		A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GooglePlace.swift; path = shoutaround/GooglePlace.swift; sourceTree = "<group>"; };
-		A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleDataProvider.swift; path = shoutaround/GoogleDataProvider.swift; sourceTree = "<group>"; };
+		A5AC5F351D6004BA0032B049 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		A5AC5F371D6004CC0032B049 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
+		A5AC5F381D6004CC0032B049 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
 		A5C775241D3C29A3001F4B1C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = shoutaround/CameraViewController.swift; sourceTree = "<group>"; };
 		A5C775261D3D304B001F4B1C /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		A5AC5F231D5F4ACA0032B049 /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
-				A53FC8EE1D46A54900C05874 /* Dictionary.swift */,
+				A5AC5F351D6004BA0032B049 /* Dictionary.swift */,
 			);
 			name = Dictionary;
 			sourceTree = "<group>";
@@ -211,8 +211,8 @@
 			children = (
 				A5AC5F271D5F4CB20032B049 /* LocationTagButtonClass.swift */,
 				A5C775241D3C29A3001F4B1C /* CameraViewController.swift */,
-				A5B67C2D1D4148F7007D3F85 /* GooglePlace.swift */,
-				A5B67C2F1D41494D007D3F85 /* GoogleDataProvider.swift */,
+				A5AC5F371D6004CC0032B049 /* GoogleDataProvider.swift */,
+				A5AC5F381D6004CC0032B049 /* GooglePlace.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -439,10 +439,10 @@
 				A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */,
 				A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */,
 				A5AC5F281D5F4CB20032B049 /* LocationTagButtonClass.swift in Sources */,
-				A5B67C2E1D4148F7007D3F85 /* GooglePlace.swift in Sources */,
+				A5AC5F391D6004CC0032B049 /* GoogleDataProvider.swift in Sources */,
+				A5AC5F361D6004BA0032B049 /* Dictionary.swift in Sources */,
+				A5AC5F3A1D6004CC0032B049 /* GooglePlace.swift in Sources */,
 				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
-				A5B67C301D41494D007D3F85 /* GoogleDataProvider.swift in Sources */,
-				A53FC8EF1D46A54900C05874 /* Dictionary.swift in Sources */,
 				A5662F221D3EEFBA00210F83 /* navigationBar.swift in Sources */,
 				A5AC5F1F1D5F4A240032B049 /* UploadLocationTagList.swift in Sources */,
 				A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */,
