@@ -28,12 +28,19 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var placesCollectionView: UICollectionView!
     @IBOutlet weak var ratingsView: UICollectionView!
+    
+    @IBOutlet weak var emoticonView1: UICollectionView!
+    @IBOutlet weak var emoticonView2: UICollectionView!
+    @IBOutlet weak var emoticonView3: UICollectionView!
+    @IBOutlet weak var emoticonView4: UICollectionView!
+    @IBOutlet var emoticonViews: Array<UICollectionView>?
 
     // Photo and Location Manager
     let locationManager = CLLocationManager()
     let library = ALAssetsLibrary()
     let UploadLocationTag = UploadLocationTagList()
     let RatingsViewFlow = RatingsViewFlowLayout()
+    let EmoticonViewFlow = EmoticonViewFlowLayout()
     
 
     
@@ -47,6 +54,14 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         let nib = UINib(nibName: "RatingsViewCell", bundle: nil)
         ratingsView.registerNib(nib, forCellWithReuseIdentifier: "RatingsViewCell")
         ratingsView.setCollectionViewLayout(RatingsViewFlow, animated: true)
+        
+        for view in emoticonViews! {
+            view.registerNib(nib, forCellWithReuseIdentifier: "RatingsViewCell")
+            view.setCollectionViewLayout(EmoticonViewFlow, animated: true)
+            view.delegate = self
+            view.decelerationRate = UIScrollViewDecelerationRateFast
+            
+        }
 
         
     }
@@ -307,11 +322,30 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         if collectionView == self.ratingsView {
          
-        return Ratings.count
+            return Ratings.count
             
-        } else {
+        } else if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
+
+            var rowindex = 0
+
+            if collectionView == emoticonView1 {
+                rowindex = 0
+            } else if collectionView == emoticonView2 {
+                rowindex = 1
+            } else if collectionView == emoticonView3 {
+                rowindex = 2
+            } else if collectionView == emoticonView4 {
+                rowindex = 3
+            }
+            
+            return EmoticonArray[rowindex].count
+            
+        }
         
-        return SearchResults.count
+        
+        else {
+        
+            return SearchResults.count
             
         }
         
@@ -348,6 +382,28 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     
         
         return cell
+            
+        } else if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
+            
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
+            
+            var rowindex = 0
+            
+            if collectionView == emoticonView1 {
+                rowindex = 0
+            } else if collectionView == emoticonView2 {
+                rowindex = 1
+            } else if collectionView == emoticonView3 {
+                rowindex = 2
+            } else if collectionView == emoticonView4 {
+                rowindex = 3
+            }
+            
+          cell.ratingsView.alpha = 0.3
+            
+          cell.RatingButton.setTitle(EmoticonArray[rowindex][(indexPath as NSIndexPath).row], forState: .Normal)
+            return cell
+            
         }
             
         
