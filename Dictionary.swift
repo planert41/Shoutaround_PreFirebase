@@ -16,6 +16,14 @@
 
 import Foundation
 
+
+var Ratings: [String] = [
+    
+    "😡","😩","😑","😋","😍","💯"
+
+]
+
+
 var Emote1Init: [String] = [
     "🍴",
     "☕️",

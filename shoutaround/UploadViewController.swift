@@ -27,11 +27,13 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet weak var LocationIcon: UIImageView!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var placesCollectionView: UICollectionView!
+    @IBOutlet weak var ratingsView: UICollectionView!
 
     // Photo and Location Manager
     let locationManager = CLLocationManager()
     let library = ALAssetsLibrary()
     let UploadLocationTag = UploadLocationTagList()
+    let RatingsViewFlow = RatingsViewFlowLayout()
     
 
     
@@ -39,6 +41,13 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
 
         placesCollectionView.delegate = self
         placesCollectionView.setCollectionViewLayout(UploadLocationTag, animated: true)
+        
+        ratingsView.delegate = self
+        ratingsView.decelerationRate = UIScrollViewDecelerationRateFast
+        let nib = UINib(nibName: "RatingsViewCell", bundle: nil)
+        ratingsView.registerNib(nib, forCellWithReuseIdentifier: "RatingsViewCell")
+        ratingsView.setCollectionViewLayout(RatingsViewFlow, animated: true)
+
         
     }
     
@@ -121,7 +130,15 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         //Location
         
-        reverseGPS(SelectedImageGPS!)
+        if SelectedImageGPS?.coordinate.latitude != nil {
+            reverseGPS(SelectedImageGPS!)
+        } else {
+            
+            let myLocation = CLLocation(latitude: 0, longitude: 0)
+            SelectedImageGPS = myLocation
+        }
+
+        
         
         var postLatitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.latitude)!)
         var postLongitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.longitude)!)
@@ -288,8 +305,16 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        if collectionView == self.ratingsView {
+         
+        return Ratings.count
+            
+        } else {
+        
         return SearchResults.count
-
+            
+        }
+        
     }
     
     
@@ -300,11 +325,40 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        if collectionView == placesCollectionView {
+        
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
         
         cell.placeButtons.setTitle(SearchResults[(indexPath as NSIndexPath).row], forState: .Normal)
         cell.UploadCellViewController = self
+        
         return cell
+            
+        }else if collectionView == ratingsView {
+            
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
+            
+        var rowindex = 0
+            
+        if collectionView == ratingsView {
+                rowindex = 0
+            }
+        cell.RatingButton.setTitle(Ratings[(indexPath as NSIndexPath).row], forState: .Normal)
+    
+        
+        return cell
+        }
+            
+        
+            
+            
+            
+        else {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
+        return cell
+            
+        }
     }
     
     

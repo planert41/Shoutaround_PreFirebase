@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="UuM-Yj-jQc" customClass="RatingsViewCell" customModule="shoutaround" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8L-jf-bbz">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJZ-XJ-dkW">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                    <state key="normal" title="😡"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="k8L-jf-bbz" firstAttribute="top" secondItem="UuM-Yj-jQc" secondAttribute="top" id="02w-Xl-LbW"/>
+                <constraint firstItem="mJZ-XJ-dkW" firstAttribute="top" secondItem="UuM-Yj-jQc" secondAttribute="top" id="BZh-je-ZrZ"/>
+                <constraint firstAttribute="trailing" secondItem="mJZ-XJ-dkW" secondAttribute="trailing" id="GAc-uF-HO3"/>
+                <constraint firstAttribute="trailing" secondItem="k8L-jf-bbz" secondAttribute="trailing" id="Ldr-WL-day"/>
+                <constraint firstAttribute="bottom" secondItem="k8L-jf-bbz" secondAttribute="bottom" id="UHe-sl-caN"/>
+                <constraint firstItem="k8L-jf-bbz" firstAttribute="leading" secondItem="UuM-Yj-jQc" secondAttribute="leading" id="izt-JM-ncI"/>
+                <constraint firstItem="mJZ-XJ-dkW" firstAttribute="leading" secondItem="UuM-Yj-jQc" secondAttribute="leading" id="jhO-Cm-8qg"/>
+                <constraint firstAttribute="bottom" secondItem="mJZ-XJ-dkW" secondAttribute="bottom" id="ovp-O3-MGq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="RatingButton" destination="mJZ-XJ-dkW" id="gXW-RM-KQ0"/>
+                <outlet property="RatingView" destination="k8L-jf-bbz" id="wrW-L0-ibq"/>
+            </connections>
+            <point key="canvasLocation" x="212" y="214"/>
+        </view>
+    </objects>
+</document>

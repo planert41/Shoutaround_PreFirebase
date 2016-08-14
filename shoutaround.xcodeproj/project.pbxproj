@@ -23,6 +23,10 @@
 		A5AC5F361D6004BA0032B049 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F351D6004BA0032B049 /* Dictionary.swift */; };
 		A5AC5F391D6004CC0032B049 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F371D6004CC0032B049 /* GoogleDataProvider.swift */; };
 		A5AC5F3A1D6004CC0032B049 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F381D6004CC0032B049 /* GooglePlace.swift */; };
+		A5AC5F421D6011430032B049 /* RatingsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AC5F411D6011430032B049 /* RatingsViewCell.xib */; };
+		A5AC5F441D6021160032B049 /* RatingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F431D6021160032B049 /* RatingsViewCell.swift */; };
+		A5AC5F461D6022A40032B049 /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F451D6022A40032B049 /* RatingsView.swift */; };
+		A5AC5F481D6027BA0032B049 /* RatingsViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5F471D6027BA0032B049 /* RatingsViewFlowLayout.swift */; };
 		A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775241D3C29A3001F4B1C /* CameraViewController.swift */; };
 		A5C775271D3D304B001F4B1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C775261D3D304B001F4B1C /* TabBarController.swift */; };
 		A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */; };
@@ -70,6 +74,10 @@
 		A5AC5F351D6004BA0032B049 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		A5AC5F371D6004CC0032B049 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		A5AC5F381D6004CC0032B049 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
+		A5AC5F411D6011430032B049 /* RatingsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingsViewCell.xib; sourceTree = "<group>"; };
+		A5AC5F431D6021160032B049 /* RatingsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewCell.swift; sourceTree = "<group>"; };
+		A5AC5F451D6022A40032B049 /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
+		A5AC5F471D6027BA0032B049 /* RatingsViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsViewFlowLayout.swift; sourceTree = "<group>"; };
 		A5C775241D3C29A3001F4B1C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = shoutaround/CameraViewController.swift; sourceTree = "<group>"; };
 		A5C775261D3D304B001F4B1C /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A5C7752D1D3D4F69001F4B1C /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +202,9 @@
 			isa = PBXGroup;
 			children = (
 				A5AC5F1B1D5BD7B70032B049 /* uploadCollectionViewCell.swift */,
+				A5AC5F411D6011430032B049 /* RatingsViewCell.xib */,
+				A5AC5F431D6021160032B049 /* RatingsViewCell.swift */,
+				A5AC5F451D6022A40032B049 /* RatingsView.swift */,
 			);
 			name = ViewCells;
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				A5AC5F1E1D5F4A240032B049 /* UploadLocationTagList.swift */,
+				A5AC5F471D6027BA0032B049 /* RatingsViewFlowLayout.swift */,
 			);
 			name = CollectionViewLayout;
 			sourceTree = "<group>";
@@ -364,6 +376,7 @@
 				A552DA471D36A34800960BC4 /* LaunchScreen.storyboard in Resources */,
 				A552DA441D36A34800960BC4 /* Assets.xcassets in Resources */,
 				A552DA421D36A34800960BC4 /* Main.storyboard in Resources */,
+				A5AC5F421D6011430032B049 /* RatingsViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,9 +450,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C775251D3C29A3001F4B1C /* CameraViewController.swift in Sources */,
+				A5AC5F461D6022A40032B049 /* RatingsView.swift in Sources */,
 				A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */,
 				A5AC5F281D5F4CB20032B049 /* LocationTagButtonClass.swift in Sources */,
 				A5AC5F391D6004CC0032B049 /* GoogleDataProvider.swift in Sources */,
+				A5AC5F481D6027BA0032B049 /* RatingsViewFlowLayout.swift in Sources */,
+				A5AC5F441D6021160032B049 /* RatingsViewCell.swift in Sources */,
 				A5AC5F361D6004BA0032B049 /* Dictionary.swift in Sources */,
 				A5AC5F3A1D6004CC0032B049 /* GooglePlace.swift in Sources */,
 				A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */,
