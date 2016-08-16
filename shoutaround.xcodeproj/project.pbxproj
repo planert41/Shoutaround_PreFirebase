@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		31B81BD7556AEDEC1FF9A272 /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81FE16807727606856F904A /* Pods_shoutaround.framework */; };
 		819FED8975543F63859E78DE /* Pods_shoutaround.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */; };
+		A5060DE01D63531400258581 /* TestDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5060DDF1D63531400258581 /* TestDictionary.swift */; };
 		A547ABCB1D382D18001C7816 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547ABCA1D382D18001C7816 /* LoginViewController.swift */; };
 		A552DA3D1D36A34800960BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552DA3C1D36A34800960BC4 /* AppDelegate.swift */; };
 		A552DA421D36A34800960BC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A552DA401D36A34800960BC4 /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 		0B580E31012E6C3F22C08152 /* Pods_shoutaround.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shoutaround.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80E513EF2B5A319F0470F7B5 /* Pods-shoutaround.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.debug.xcconfig"; sourceTree = "<group>"; };
 		8409A1EA991F441EF5480912 /* Pods-shoutaround.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoutaround.release.xcconfig"; path = "Pods/Target Support Files/Pods-shoutaround/Pods-shoutaround.release.xcconfig"; sourceTree = "<group>"; };
+		A5060DDF1D63531400258581 /* TestDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDictionary.swift; sourceTree = "<group>"; };
 		A547ABC61D381F21001C7816 /* shoutaround-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "shoutaround-Bridging-Header.h"; path = "shoutaround/shoutaround-Bridging-Header.h"; sourceTree = "<group>"; };
 		A547ABCA1D382D18001C7816 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A552DA391D36A34800960BC4 /* shoutaround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shoutaround.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				A5AC5F351D6004BA0032B049 /* Dictionary.swift */,
+				A5060DDF1D63531400258581 /* TestDictionary.swift */,
 			);
 			name = Dictionary;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				A5C7752E1D3D4F69001F4B1C /* UploadViewController.swift in Sources */,
 				A5AC5F281D5F4CB20032B049 /* LocationTagButtonClass.swift in Sources */,
 				A5AC5F391D6004CC0032B049 /* GoogleDataProvider.swift in Sources */,
+				A5060DE01D63531400258581 /* TestDictionary.swift in Sources */,
 				A5AC5F481D6027BA0032B049 /* RatingsViewFlowLayout.swift in Sources */,
 				A5AC5F4A1D602C9F0032B049 /* EmoticonViewFlowLayout.swift in Sources */,
 				A5AC5F441D6021160032B049 /* RatingsViewCell.swift in Sources */,

@@ -15,8 +15,10 @@ import SwiftyJSON
 
 public var SelectedImageGPS: CLLocation?
 public var SelectedImageData: UIImage?
-public var GooglePlacesID = ["":""]
+public var GooglePlacesID = [String():String()]
 public var SearchResults = [String()]
+public var tags = [String()]
+public var EmoticonLookup: [String:String] = ["":""]
 
 class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
 
@@ -24,16 +26,18 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet weak var postCaption: UITextView!
     
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var LocationIcon: UIImageView!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var placesCollectionView: UICollectionView!
-    @IBOutlet weak var ratingsView: UICollectionView!
+    @IBOutlet weak var ratingsView: RatingsView!
     
-    @IBOutlet weak var emoticonView1: UICollectionView!
-    @IBOutlet weak var emoticonView2: UICollectionView!
-    @IBOutlet weak var emoticonView3: UICollectionView!
-    @IBOutlet weak var emoticonView4: UICollectionView!
+    @IBOutlet weak var emoticonView1: EmoticonView!
+    @IBOutlet weak var emoticonView2: EmoticonView!
+    @IBOutlet weak var emoticonView3: EmoticonView!
+    @IBOutlet weak var emoticonView4: EmoticonView!
     @IBOutlet var emoticonViews: Array<UICollectionView>?
+    
 
     // Photo and Location Manager
     let locationManager = CLLocationManager()
@@ -41,11 +45,30 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     let UploadLocationTag = UploadLocationTagList()
     let RatingsViewFlow = RatingsViewFlowLayout()
     let EmoticonViewFlow = EmoticonViewFlowLayout()
+    var hideView : UIView?
+
     
+    var displayedtags = [String()]{
+        didSet
+        {
+            self.updateTags()
+        }
+    }
 
     
     override func viewDidLoad() {
 
+        let testFrame : CGRect = CGRectMake(0,0,1000,1000)
+        hideView = UIView(frame: testFrame)
+        // Create Blank View To Hide Load
+        hideView!.backgroundColor = UIColor.whiteColor()
+        hideView!.alpha=1
+        self.view.addSubview(hideView!)
+        
+        
+        
+        
+        
         placesCollectionView.delegate = self
         placesCollectionView.setCollectionViewLayout(UploadLocationTag, animated: true)
         
@@ -62,6 +85,12 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             view.decelerationRate = UIScrollViewDecelerationRateFast
             
         }
+        
+        // Reverse Emoticon Lookup
+        for (input,output) in EmoticonDictionary {
+            EmoticonLookup[output] = input
+        }
+     
 
         
     }
@@ -75,8 +104,61 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             showImagePicker()
         }
         self.tabBarController?.tabBar.hidden = true
+        postCaption.delegate = self
+        
 
         }
+    
+    func updateTags()   {
+        
+    // Loops through string in displayed tags, identifies source, updates tag label with displayed tags, highlights cells
+        
+        for emoticon:String in displayedtags{
+            
+            var cellcolor:UIColor?
+            
+            if Emote1Init.contains(emoticon){
+                cellcolor = UIColor(red: 252/255, green: 189/255, blue: 0/255, alpha: 1.0)
+            }
+            if Emote2Init.contains(emoticon){
+                cellcolor = UIColor.blackColor()
+            }
+            if Emote3Init.contains(emoticon){
+                cellcolor = UIColor.redColor()
+            }
+            if Emote4Init.contains(emoticon){
+                cellcolor = UIColor(red: 0/255, green: 189/255, blue: 252/255, alpha: 1.0)
+            }
+            else {
+                cellcolor = UIColor.whiteColor()
+            }
+        }
+        
+        self.tagLabel.text = displayedtags.joinWithSeparator("")
+        self.highlight()
+        
+        //self.view1.reloadData()
+
+    }
+    
+    func highlight() {
+        for collectionviews in self.emoticonViews!{
+            for cell in collectionviews.visibleCells() as! [RatingsViewCell]{
+                if tags.contains((cell.RatingButton.titleLabel!.text)!) {
+                    cell.RatingButton.alpha = 1
+                } else {cell.RatingButton.alpha = 0.3}
+            }
+        }
+        
+            for cell in ratingsView.visibleCells() as! [RatingsViewCell]{
+                if tags.contains((cell.RatingButton.titleLabel!.text)!) {
+                    cell.RatingButton.alpha = 1
+                } else {cell.RatingButton.alpha = 0.3}
+            }
+        
+
+    }
+
     
     
     @IBAction func UploadBack(sender: AnyObject) {
@@ -118,7 +200,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         )
         
         self.dismissViewControllerAnimated(true, completion: nil)
-        
+        self.hideView?.hidden = true
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
@@ -135,13 +217,12 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     override func viewDidAppear (animated: Bool) {
         
         
+        
         // Selected Image
         uploadImage.image = SelectedImageData
         
         //Captions
         postCaption.delegate = self
-        postCaption.text = "Caption Here"
-        postCaption.textColor = UIColor.lightGrayColor()
         
         //Location
         
@@ -164,24 +245,140 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         locationView.layer.borderWidth = 1
         locationView.layer.borderColor = UIColor(red:222/255.0, green:225/255.0, blue:227/255.0, alpha: 1.0).CGColor
         
-
         
         
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        if textView.textColor == UIColor.lightGrayColor() {
+        
+        if textView.text == "Caption Here" {
             textView.text = nil
-            textView.textColor = UIColor.blackColor()
         }
+        
+        textView.textColor = UIColor.blackColor()
+        
     }
     
     func textViewDidEndEditing(textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Placeholder"
+            textView.text = "Caption Here"
             textView.textColor = UIColor.lightGrayColor()
         }
     }
+    
+ 
+    /*
+    
+    func textViewDidChange(textView: UITextView) {
+
+        
+        let char = textView.text.cStringUsingEncoding(NSUTF8StringEncoding)!
+        let isBackSpace = strcmp(char, "\\b")
+        let attributedString = NSMutableAttributedString(string: textView.text!)
+        print(char)
+        
+        if (textView.text == " " || isBackSpace == -92) {
+            let words = textView.text!.componentsSeparatedByString(" ")
+            var temptags = [String()]
+            
+            for word in words {
+                //if word.hasPrefix("#") {
+                let lookupword = word.stringByReplacingOccurrencesOfString("#", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                let attributedLookupString = NSMutableAttributedString(string: lookupword)
+                
+                if EmoticonLookup[lookupword] == nil {
+                    if word.hasPrefix("#"){
+                        temptags.append(word)
+                    }
+                } else {
+                    temptags.append((EmoticonLookup[lookupword])!)
+                    
+                    let longestWordRange = (textView.text! as NSString).rangeOfString(lookupword)
+                    
+                    attributedString.setAttributes([NSFontAttributeName : UIFont.boldSystemFontOfSize(20), NSForegroundColorAttributeName : UIColor.redColor()], range: longestWordRange)
+                    
+                    if Emote1Init.contains(lookupword) {
+                        attributedLookupString.setAttributes([NSFontAttributeName : UIFont.boldSystemFontOfSize(20), NSForegroundColorAttributeName : UIColor.redColor()], range: longestWordRange)
+                    }
+                    
+                    
+                }
+            }
+            tags = temptags
+            self.displayedtags = tags
+            textView.attributedText = attributedString
+            
+            //}
+        }
+        /*
+         let  char = string.cStringUsingEncoding(NSUTF8StringEncoding)!
+         let isBackSpace = strcmp(char, "\\b")
+         
+         if (isBackSpace == -92) {
+         print("Backspace was pressed")
+         }*/
+        print("test")
+
+        
+        
+    }
+
+    */
+    
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+
+        let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
+        let isBackSpace = strcmp(char, "\\b")
+        let attributedString = NSMutableAttributedString(string: textView.text!)
+        
+        if (text == " " || isBackSpace == -92) {
+            let words = textView.text!.componentsSeparatedByString(" ")
+            var temptags = [String()]
+            for word in words {
+                //if word.hasPrefix("#") {
+                var lookupword = word.stringByReplacingOccurrencesOfString("#", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                let attributedLookupString = NSMutableAttributedString(string: lookupword)
+                lookupword = lookupword.lowercaseString
+
+                if EmoticonLookup[lookupword] == nil {
+                    if word.hasPrefix("#"){
+                        temptags.append(word)
+                    }
+                } else {
+                    temptags.append((EmoticonLookup[lookupword])!)
+                    
+                    /*
+                    let longestWordRange = (textView.text! as NSString).rangeOfString(lookupword)
+                    
+                    attributedString.setAttributes([NSFontAttributeName : UIFont.boldSystemFontOfSize(20), NSForegroundColorAttributeName : UIColor.redColor()], range: longestWordRange)
+                    
+                    if Emote1Init.contains(lookupword) {
+                        attributedLookupString.setAttributes([NSFontAttributeName : UIFont.boldSystemFontOfSize(20), NSForegroundColorAttributeName : UIColor.redColor()], range: longestWordRange)
+ 
+                    }
+                    */
+                    
+                }
+            }
+            tags = temptags
+            self.displayedtags = tags
+            textView.attributedText = attributedString
+            
+            //}
+        }
+        
+        return true
+    }
+    
+    func textView(textView: UITextView, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+            return true
+    }
+ 
+    
+
     
     func reverseGPS(GPSLocation: CLLocation) {
         
@@ -344,8 +541,9 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         
         else {
-        
-            return SearchResults.count
+            if SearchResults.count > 1 {
+                return SearchResults.count}
+            else {return 0}
             
         }
         
@@ -357,35 +555,36 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         return 1
     }
+        
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if collectionView == placesCollectionView {
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
         
-        cell.placeButtons.setTitle(SearchResults[(indexPath as NSIndexPath).row], forState: .Normal)
-        cell.UploadCellViewController = self
+            cell.placeButtons.setTitle(SearchResults[(indexPath as NSIndexPath).row], forState: .Normal)
+            cell.UploadCellViewController = self
         
-        return cell
+            return cell
             
         }else if collectionView == ratingsView {
             
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
             
-        var rowindex = 0
+            var rowindex = 0
             
-        if collectionView == ratingsView {
-                rowindex = 0
-            }
-        cell.RatingButton.setTitle(Ratings[(indexPath as NSIndexPath).row], forState: .Normal)
+            if collectionView == ratingsView {
+                rowindex = 0}
+
+            cell.RatingButton.setTitle(Ratings[(indexPath as NSIndexPath).row], forState: .Normal)
+            cell.RatingButton.alpha = 0.3
     
-        
-        return cell
+            return cell
             
         } else if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
             
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
             
             var rowindex = 0
             
@@ -398,23 +597,29 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             } else if collectionView == emoticonView4 {
                 rowindex = 3
             }
-            
-          cell.ratingsView.alpha = 0.3
-            
+           
           cell.RatingButton.setTitle(EmoticonArray[rowindex][(indexPath as NSIndexPath).row], forState: .Normal)
+          cell.RatingButton.alpha = 0.3
+            
             return cell
             
         }
             
-        
-            
-            
-            
         else {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
-        return cell
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("uploadCollectionViewCell", forIndexPath: indexPath) as! uploadCollectionViewCell
             
+            return cell
         }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! RatingsViewCell
+        cell.cellViewController = self
+        cell.EmoticonSelected(cell)
+       // var cell = collectionView.cellForItemAtIndexPath(indexPath) as RatingsViewCell
+        //cell.EmoticonSelected()
+        
     }
     
     

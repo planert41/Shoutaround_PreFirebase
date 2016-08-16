@@ -52,8 +52,10 @@ class LoginViewController : PFLogInViewController {
         // create an array of all the views we want to animate in when we launch
         // the screen
         viewsToAnimate = [self.logInView?.usernameField, self.logInView?.passwordField, self.logInView?.logInButton, self.logInView?.passwordForgottenButton, self.logInView?.facebookButton, self.logInView?.twitterButton, self.logInView?.signUpButton, self.logInView?.logo]
-
+        
+        if (userdefault.stringForKey("username") != nil && userdefault.stringForKey("username") != " ") {
         logInView?.usernameField!.text = userdefault.stringForKey("username")
+        }
         
         
         

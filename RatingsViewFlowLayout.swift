@@ -42,8 +42,8 @@ class RatingsViewFlowLayout: UICollectionViewFlowLayout {
      Sets up the layout for the collectionView. 0 distance between each cell, and vertical layout
      */
     func setupLayout() {
-        minimumInteritemSpacing = 10
-        minimumLineSpacing = 5
+        minimumInteritemSpacing = 0
+        minimumLineSpacing = 0
         scrollDirection = .Horizontal
         
         

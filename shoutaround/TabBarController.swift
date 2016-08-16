@@ -38,10 +38,10 @@ class TabBarController: UITabBarController, PFSignUpViewControllerDelegate, PFLo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        
+        /*
         if userdefault.stringForKey("username") == nil {
-            userdefault.setObject(" ", forKey: "username")
-        }
+            userdefault.setObject("", forKey: "username")
+        }*/
 
         
         self.delegate = self
