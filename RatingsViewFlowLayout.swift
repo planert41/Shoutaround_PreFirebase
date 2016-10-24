@@ -18,7 +18,7 @@ import UIKit
 
 class RatingsViewFlowLayout: UICollectionViewFlowLayout {
     
-    let itemHeight: CGFloat = 50
+    let itemHeight: CGFloat = 40
     
     override init() {
         super.init()

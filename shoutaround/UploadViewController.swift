@@ -11,6 +11,8 @@ import AssetsLibrary
 import GoogleMaps
 import Alamofire
 import SwiftyJSON
+import Cosmos
+
 
 
 public var SelectedImageGPS: CLLocation?
@@ -30,7 +32,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet weak var LocationIcon: UIImageView!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var placesCollectionView: UICollectionView!
-    @IBOutlet weak var ratingsView: RatingsView!
+  //  @IBOutlet weak var ratingsView: RatingsView!
     
     @IBOutlet weak var emoticonView1: EmoticonView!
     @IBOutlet weak var emoticonView2: EmoticonView!
@@ -38,6 +40,16 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet weak var emoticonView4: EmoticonView!
     @IBOutlet var emoticonViews: Array<UICollectionView>?
     
+    
+    var postRating: Double! = 0
+    @IBOutlet var StarRating: CosmosView!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var starSlider: UISlider!
+    @IBAction func StarSlider(sender: UISlider) {
+        self.postRating = Double(lroundf(sender.value)) / 2
+        self.ratingupdate()
+
+    }
 
     // Photo and Location Manager
     let locationManager = CLLocationManager()
@@ -54,9 +66,70 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             self.updateTags()
         }
     }
+    
 
+    private func ratingupdate() {
+        
+        if postRating == 0 { ratingLabel.alpha = 0} else {ratingLabel.alpha = 1; ratingLabel.layer.borderColor = UIColor.blackColor().CGColor; ratingLabel.layer.borderWidth = 1.0;}
+        
+        if postRating % 1 == 0.5 {
+            ratingLabel.text = String(format:"%.1f", postRating) } else
+        { ratingLabel.text = String(format:"%.0f", postRating) }
+        
+        if postRating < 3 {
+            ratingLabel.backgroundColor = UIColor.redColor()
+        }
+        else if postRating < 7 {
+            ratingLabel.backgroundColor = UIColor.orangeColor()
+        }
+        else if postRating > 7 {
+            ratingLabel.backgroundColor = UIColor.yellowColor()
+        }
+        
+        starSlider.setValue(Float(postRating * 2), animated: true)
+        StarRating.rating = postRating
+
+        
+    }
+    
+    func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
+        //  print("A")
+        
+        let pointTapped: CGPoint = gestureRecognizer.locationInView(self.view)
+        
+        let positionOfSlider: CGPoint = starSlider.frame.origin
+        let widthOfSlider: CGFloat = starSlider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(starSlider.maximumValue) / widthOfSlider)
+        
+        starSlider.setValue(Float(ceil(newValue)), animated: true)
+        self.postRating = Double(lroundf(starSlider.value)) / 2
+        self.ratingupdate()
+    }
     
     override func viewDidLoad() {
+        
+        
+        self.ratingLabel.layer.cornerRadius = self.ratingLabel.frame.size.width / 2;
+        self.ratingLabel.clipsToBounds = true;
+        //self.ratingLabel.backgroundColor = UIColor(patternImage: UIImage(named: "star")!)
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sliderTapped:")
+        self.starSlider.addGestureRecognizer(tapGestureRecognizer)
+        
+        
+        if postRating == 0 {
+            ratingLabel.text = ""
+            StarRating.rating = 0
+        }
+        
+        StarRating.settings.fillMode = .Half
+        StarRating.settings.minTouchRating = 0
+        StarRating.didTouchCosmos = { rating in
+            print(rating)
+            self.postRating = rating
+            self.ratingupdate()
+        }
+        
 
         let testFrame : CGRect = CGRectMake(0,0,1000,1000)
         hideView = UIView(frame: testFrame)
@@ -72,11 +145,15 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         placesCollectionView.delegate = self
         placesCollectionView.setCollectionViewLayout(UploadLocationTag, animated: true)
         
+        let nib = UINib(nibName: "RatingsViewCell", bundle: nil)
+
+        
+        /*
         ratingsView.delegate = self
         ratingsView.decelerationRate = UIScrollViewDecelerationRateFast
-        let nib = UINib(nibName: "RatingsViewCell", bundle: nil)
         ratingsView.registerNib(nib, forCellWithReuseIdentifier: "RatingsViewCell")
         ratingsView.setCollectionViewLayout(RatingsViewFlow, animated: true)
+        */
         
         for view in emoticonViews! {
             view.registerNib(nib, forCellWithReuseIdentifier: "RatingsViewCell")
@@ -150,12 +227,13 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             }
         }
         
+        /*
             for cell in ratingsView.visibleCells() as! [RatingsViewCell]{
                 if tags.contains((cell.RatingButton.titleLabel!.text)!) {
                     cell.RatingButton.alpha = 1
                 } else {cell.RatingButton.alpha = 0.3}
             }
-        
+        */
 
     }
 
@@ -240,7 +318,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         var postLongitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.longitude)!)
         
         locationLabel.text = "Lat,Long : " + postLatitude + "," + postLongitude
-        LocationIcon.image = UIImage(named: "caps_lock_on_filled")
+        //LocationIcon.image = UIImage(named: "caps_lock_on_filled")
         
         locationView.layer.borderWidth = 1
         locationView.layer.borderColor = UIColor(red:222/255.0, green:225/255.0, blue:227/255.0, alpha: 1.0).CGColor
@@ -517,11 +595,14 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == self.ratingsView {
+        /*if collectionView == self.ratingsView {
          
             return Ratings.count
             
-        } else if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
+        } else*/
+            
+            
+            if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
 
             var rowindex = 0
 
@@ -568,7 +649,9 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
             return cell
             
-        }else if collectionView == ratingsView {
+        }
+        /*
+        else if collectionView == ratingsView {
             
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
             
@@ -582,7 +665,9 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     
             return cell
             
-        } else if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
+        } */
+ 
+        else if (collectionView == emoticonView1 || collectionView == emoticonView2 || collectionView == emoticonView3 || collectionView == emoticonView4 ){
             
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("RatingsViewCell", forIndexPath: indexPath) as! RatingsViewCell
             

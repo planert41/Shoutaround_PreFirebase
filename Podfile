@@ -11,4 +11,5 @@ pod 'GoogleMaps'
 pod 'SwiftyJSON’
 pod 'Alamofire', '~> 3.1.2'
 pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
+pod 'Cosmos', git: 'https://github.com/marketplacer/Cosmos.git', branch: 'swift-2.3'
 end

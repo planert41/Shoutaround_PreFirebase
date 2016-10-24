@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
+  - Cosmos (0.0.1)
   - FBSDKCoreKit (4.9.1):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.9.1):
@@ -30,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.1.2)
+  - Cosmos (from `https://github.com/marketplacer/Cosmos.git`, branch `swift-2.3`)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - GoogleMaps
@@ -41,10 +43,16 @@ DEPENDENCIES:
   - SwiftyJSON
 
 EXTERNAL SOURCES:
+  Cosmos:
+    :branch: swift-2.3
+    :git: https://github.com/marketplacer/Cosmos.git
   SendGrid:
     :git: https://github.com/scottkawai/sendgrid-swift.git
 
 CHECKOUT OPTIONS:
+  Cosmos:
+    :commit: dffe5a2b0004c6a3ea99ddefc80404e6214e39e5
+    :git: https://github.com/marketplacer/Cosmos.git
   SendGrid:
     :commit: 663a395ac0f5eaab0c091d4f64812381be1f24b1
     :git: https://github.com/scottkawai/sendgrid-swift.git
@@ -52,6 +60,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
   Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Cosmos: b08ddd200d0ac337231f6c94fc5abce5d27bc312
   FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
   FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
   GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
@@ -62,6 +71,6 @@ SPEC CHECKSUMS:
   SendGrid: d75e10f40d4d6a3301f6cb0dac77c12797b41db1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4df5c52b55816d1c82c02a8b4b2abacbbb6e470d
+PODFILE CHECKSUM: 7e74e740004182e3807b5a4293212f011bd754d0
 
 COCOAPODS: 1.0.1
