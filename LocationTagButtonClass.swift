@@ -11,6 +11,7 @@ import UIKit
 class CustomButton: UIButton {
     
     var shadowLayer: CAShapeLayer!
+    var LocationTagGPS: CLLocation?
     
     override func layoutSubviews() {
         super.layoutSubviews()

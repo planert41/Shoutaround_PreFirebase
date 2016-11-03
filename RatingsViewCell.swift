@@ -50,7 +50,9 @@ class RatingsViewCell: UICollectionViewCell {
         }
         
         self.cellViewController!.postCaption.text = tempCaption
+        self.cellViewController!.postCaption.textColor = UIColor.blackColor()
         self.cellViewController?.displayedtags = tags
+        print(tags)
         
         
         /*

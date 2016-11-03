@@ -15,25 +15,47 @@ import Cosmos
 
 
 
-public var SelectedImageGPS: CLLocation?
 public var SelectedImageData: UIImage?
+public var SelectedImageGPS: CLLocation?
+public var CurrentLocation: CLLocation?
+
+public var SelectedLocationAdress: String?
+public var SelectedLocationName: String?
+
 public var GooglePlacesID = [String():String()]
 public var SearchResults = [String()]
+public var SearchLocations = [String():CLLocation()]
+public var SearchLocationNames = [String():String()]
+
+
 public var tags = [String()]
 public var EmoticonLookup: [String:String] = ["":""]
 
-class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
+public var SelectionEmoticonImageData: UIImage?
+public var postRating: Double! = 0
+
+
+class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, JOEmojiableDelegate {
 
     @IBOutlet weak var uploadImage: UIImageView!
     @IBOutlet weak var postCaption: UITextView!
     
+    @IBOutlet weak var locationTextview: UITextView!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var tagLabel: UILabel!
-    @IBOutlet weak var LocationIcon: UIImageView!
+    @IBOutlet weak var locationAdressLabel: UILabel!
+    
+    
+    @IBOutlet weak var tagLabel: UITextView!
+    @IBOutlet weak var LocationIcon: UIButton!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var placesCollectionView: UICollectionView!
   //  @IBOutlet weak var ratingsView: RatingsView!
+
+
     
+    @IBOutlet weak var starview: UIView!
+    @IBOutlet weak var Button2: UIButton!
+    @IBOutlet weak var Button1: UIButton!
     @IBOutlet weak var emoticonView1: EmoticonView!
     @IBOutlet weak var emoticonView2: EmoticonView!
     @IBOutlet weak var emoticonView3: EmoticonView!
@@ -41,12 +63,71 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     @IBOutlet var emoticonViews: Array<UICollectionView>?
     
     
-    var postRating: Double! = 0
-    @IBOutlet var StarRating: CosmosView!
+    
+    @IBOutlet weak var emoticonRating: UIImageView!
     @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var starSlider: UISlider!
+    @IBOutlet var StarRating: CosmosView!
+
+ //   @IBOutlet weak var starSlider: UISlider!
+    
+    @IBOutlet weak var ratingCancel: UIButton!
+    @IBOutlet weak var locationCancel: UIButton!
+    
+    
+    
+    
+    
+    
+    @IBAction func locationIconPressed(sender: AnyObject) {
+    
+        
+        
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+        
+            SelectedLocationName = nil
+            SelectedLocationAdress = nil
+            SelectedImageGPS = nil
+            
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+
+                
+            
+            
+        }
+    
+    }
+    
+    
+    
+    @IBAction func locationCanceled(sender: AnyObject) {
+    
+        self.locationLabel.text = nil
+        self.locationTextview.text = nil
+        self.locationAdressLabel.text = nil
+        self.locationCancel.hidden = true
+
+    
+    }
+    
+    @IBAction func ratingCanceled(sender: AnyObject) {
+    
+        self.ratingLabel.text = nil
+        self.emoticonRating.image = nil
+        self.ratingCancel.hidden = true
+        
+    }
+    
+    
     @IBAction func StarSlider(sender: UISlider) {
-        self.postRating = Double(lroundf(sender.value)) / 2
+        postRating = Double(lroundf(sender.value)) / 2
         self.ratingupdate()
 
     }
@@ -58,11 +139,19 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     let RatingsViewFlow = RatingsViewFlowLayout()
     let EmoticonViewFlow = EmoticonViewFlowLayout()
     var hideView : UIView?
-
-    
+    var selectedView: UICollectionView? = nil
     var displayedtags = [String()]{
         didSet
         {
+            if displayedtags.count > 11 {
+                
+                displayedtags.removeLast()
+                let alert = UIAlertController(title: "Tag Limit", message: "You have reached your tag limit of 10", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
+            }
             self.updateTags()
         }
     }
@@ -70,28 +159,74 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
 
     private func ratingupdate() {
         
-        if postRating == 0 { ratingLabel.alpha = 0} else {ratingLabel.alpha = 1; ratingLabel.layer.borderColor = UIColor.blackColor().CGColor; ratingLabel.layer.borderWidth = 1.0;}
+        if postRating == 0 { ratingLabel.alpha = 0} else {ratingLabel.alpha = 1;
+            
+            //ratingLabel.layer.borderColor = UIColor.blackColor().CGColor; ratingLabel.layer.borderWidth = 1.0;
+        }
         
         if postRating % 1 == 0.5 {
             ratingLabel.text = String(format:"%.1f", postRating) } else
-        { ratingLabel.text = String(format:"%.0f", postRating) }
+        { ratingLabel.text = String(format:"%.1f", postRating) }
         
         if postRating < 3 {
-            ratingLabel.backgroundColor = UIColor.redColor()
+            ratingLabel.textColor = UIColor.redColor()
         }
         else if postRating < 7 {
-            ratingLabel.backgroundColor = UIColor.orangeColor()
+            ratingLabel.textColor = UIColor.orangeColor()
         }
         else if postRating > 7 {
-            ratingLabel.backgroundColor = UIColor.yellowColor()
+            ratingLabel.textColor = UIColor.yellowColor()
         }
         
-        starSlider.setValue(Float(postRating * 2), animated: true)
-        StarRating.rating = postRating
+        
+        
+        
+        if postRating > 0 || emoticonRating != nil {
+            
+            self.ratingCancel.hidden = false
+        }
+        
+        //ratingLabel.layer.cornerRadius = self.ratingLabel.frame.size.width / 2;
+        //ratingLabel.clipsToBounds = true;
+        //self.ratingLabel.backgroundColor = UIColor(patternImage: UIImage(named: "star")!)
+
+        
+       // starSlider.setValue(Float(postRating * 2), animated: true)
+       // StarRating.rating = postRating
 
         
     }
     
+    
+    
+    
+    func updateGPS(){
+        
+        var postLatitude:String! = String(format:"%.2f",(SelectedImageGPS?.coordinate.latitude)!)
+        var postLongitude:String! = String(format:"%.2f",(SelectedImageGPS?.coordinate.longitude)!)
+        var GPSLabelText:String?
+        
+        if SelectedLocationAdress == nil {
+            GPSLabelText = "GPS (Lat,Long): " + " (" + postLatitude + "," + postLongitude + ")"
+            locationLabel.text =  GPSLabelText!
+            locationAdressLabel.text == ""
+            
+        } else {
+            GPSLabelText = " (GPS: " + postLatitude + "," + postLongitude + ")"
+            locationLabel.text =  GPSLabelText!
+            locationAdressLabel.text = SelectedLocationAdress
+            
+        }
+        locationTextview.text =  SelectedLocationName
+        locationAdressLabel.sizeToFit()
+        locationLabel.sizeToFit()
+        locationCancel.hidden = false
+        
+        
+    }
+
+    
+    /*
     func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
         //  print("A")
         
@@ -105,16 +240,57 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         self.postRating = Double(lroundf(starSlider.value)) / 2
         self.ratingupdate()
     }
+     */
     
     override func viewDidLoad() {
         
+        var Button1Convert = CGRectMake(Button1.frame.minX, Button1.frame.minY + starview.frame.minY, Button1.frame.width, Button1.frame.height)
         
-        self.ratingLabel.layer.cornerRadius = self.ratingLabel.frame.size.width / 2;
-        self.ratingLabel.clipsToBounds = true;
-        //self.ratingLabel.backgroundColor = UIColor(patternImage: UIImage(named: "star")!)
+        
+        var Button2Convert = CGRectMake(Button2.frame.minX, Button2.frame.minY + starview.frame.minY, Button2.frame.width, Button2.frame.height)
 
+        
+        // Hide Cancel Buttons
+        
+        self.ratingCancel.hidden = true
+        self.locationCancel.hidden = true
+        self.locationLabel.text = nil
+        self.locationTextview.text = nil
+        self.locationAdressLabel.text = nil
+        
+        let Button1Emoji             = JOEmojiableBtn(frame: Button1Convert)
+        Button1Emoji.delegate        = self
+        Button1Emoji.alpha = 0.15
+        Button1Emoji.backgroundColor = UIColor(patternImage: self.ResizeImage(UIImage(named: "B1BW")!, targetSize: CGSizeMake(Button1Emoji.frame.width, Button1Emoji.frame.height)))
+        Button1Emoji.dataset         = [
+            JOEmojiableOption(image: "B1", name: "dislike"),
+            JOEmojiableOption(image: "B2", name: "broken"),
+            JOEmojiableOption(image: "B3", name: "he he"),
+            JOEmojiableOption(image: "B4", name: "ooh"),
+            JOEmojiableOption(image: "B5", name: "meh!"),
+            JOEmojiableOption(image: "B6", name: "ahh!")
+        ]
+        
+        self.view.addSubview(Button1Emoji)
+        
+        
+        let Button2Emoji             = JOEmojiableBtn(frame: Button2Convert)
+        Button2Emoji.delegate        = self
+        Button2Emoji.alpha = 0.15
+        Button2Emoji.backgroundColor = UIColor(patternImage: self.ResizeImage(UIImage(named: "G1BW")!, targetSize: CGSizeMake(Button2Emoji.frame.width, Button2Emoji.frame.height)))
+            Button2Emoji.dataset         = [
+            JOEmojiableOption(image: "G1", name: "dislike"),
+            JOEmojiableOption(image: "G2", name: "broken"),
+            JOEmojiableOption(image: "G3", name: "he he"),
+            JOEmojiableOption(image: "G4", name: "ooh"),
+            JOEmojiableOption(image: "G5", name: "meh!"),
+            JOEmojiableOption(image: "G6", name: "ahh!")
+        ]
+        self.view.addSubview(Button2Emoji)
+
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sliderTapped:")
-        self.starSlider.addGestureRecognizer(tapGestureRecognizer)
+        //self.starSlider.addGestureRecognizer(tapGestureRecognizer)
         
         
         if postRating == 0 {
@@ -126,7 +302,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         StarRating.settings.minTouchRating = 0
         StarRating.didTouchCosmos = { rating in
             print(rating)
-            self.postRating = rating
+            postRating = rating
             self.ratingupdate()
         }
         
@@ -168,10 +344,77 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             EmoticonLookup[output] = input
         }
      
-
+        // Do any additional setup after loading the view, typically from a nib.
+        let lpgr1 = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let lpgr2 = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let lpgr3 = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let lpgr4 = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        
+        
+        
+        lpgr1.minimumPressDuration = 0.5
+        lpgr2.minimumPressDuration = 0.5
+        lpgr3.minimumPressDuration = 0.5
+        lpgr4.minimumPressDuration = 0.5
+        //lpgr.delaysTouchesBegan = true
+        lpgr1.delegate = self
+        lpgr2.delegate = self
+        lpgr3.delegate = self
+        lpgr4.delegate = self
+        
+        emoticonView1.addGestureRecognizer(lpgr1)
+        emoticonView2.addGestureRecognizer(lpgr2)
+        emoticonView3.addGestureRecognizer(lpgr3)
+        emoticonView4.addGestureRecognizer(lpgr4)
         
     }
     
+    
+    
+    
+    
+    override func viewDidAppear (animated: Bool) {
+        
+
+        
+        /*
+        if (self.ratingLabel == nil && emoticonRating == nil) {
+            self.ratingCancel.hidden = true } else {
+            self.ratingCancel.hidden = false}
+        
+        if self.locationLabel == nil {
+            self.locationCancel.hidden = true} else{
+            self.locationCancel.hidden = false}
+        */
+        
+        // Selected Image
+        uploadImage.image = SelectedImageData
+        
+        //Captions
+        postCaption.delegate = self
+        
+        //Location
+        
+        if SelectedImageGPS?.coordinate.latitude != nil {
+            reverseGPS(SelectedImageGPS!)
+        } else {
+            
+            let myLocation = CLLocation(latitude: 0, longitude: 0)
+            SelectedImageGPS = myLocation
+        }
+        
+        updateGPS()
+
+        
+        
+        //LocationIcon.image = UIImage(named: "caps_lock_on_filled")
+        
+        locationView.layer.borderWidth = 1
+        locationView.layer.borderColor = UIColor(red:222/255.0, green:225/255.0, blue:227/255.0, alpha: 1.0).CGColor
+        
+        
+        
+    }
     
     override func viewWillAppear(animated: Bool) {
         
@@ -185,6 +428,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
 
         }
+    
     
     func updateTags()   {
         
@@ -212,6 +456,7 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         }
         
         self.tagLabel.text = displayedtags.joinWithSeparator("")
+        print(displayedtags)
         self.highlight()
         
         //self.view1.reloadData()
@@ -290,61 +535,42 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
 
         
     }
-    
-    
-    override func viewDidAppear (animated: Bool) {
-        
-        
-        
-        // Selected Image
-        uploadImage.image = SelectedImageData
-        
-        //Captions
-        postCaption.delegate = self
-        
-        //Location
-        
-        if SelectedImageGPS?.coordinate.latitude != nil {
-            reverseGPS(SelectedImageGPS!)
-        } else {
-            
-            let myLocation = CLLocation(latitude: 0, longitude: 0)
-            SelectedImageGPS = myLocation
-        }
 
-        
-        
-        var postLatitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.latitude)!)
-        var postLongitude:String! = String(format:"%.4f",(SelectedImageGPS?.coordinate.longitude)!)
-        
-        locationLabel.text = "Lat,Long : " + postLatitude + "," + postLongitude
-        //LocationIcon.image = UIImage(named: "caps_lock_on_filled")
-        
-        locationView.layer.borderWidth = 1
-        locationView.layer.borderColor = UIColor(red:222/255.0, green:225/255.0, blue:227/255.0, alpha: 1.0).CGColor
-        
-        
-        
-    }
     
     func textViewDidBeginEditing(textView: UITextView) {
+        
+        if textView == postCaption {
         
         if textView.text == "Caption Here" {
             textView.text = nil
         }
         
         textView.textColor = UIColor.blackColor()
-        
+        }
     }
     
     func textViewDidEndEditing(textView: UITextView) {
+        if textView == postCaption {
+
         if textView.text.isEmpty {
             textView.text = "Caption Here"
             textView.textColor = UIColor.lightGrayColor()
         }
+        }
     }
     
  
+    func textViewDidChange(textView: UITextView) {
+        if textView == postCaption {
+
+        if textView.text == "Caption Here" {
+            textView.textColor = UIColor.lightGrayColor()} else
+        {textView.textColor = UIColor.blackColor()}
+        }
+    }
+        
+    
+    
     /*
     
     func textViewDidChange(textView: UITextView) {
@@ -411,15 +637,18 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         let isBackSpace = strcmp(char, "\\b")
         let attributedString = NSMutableAttributedString(string: textView.text!)
         
+        if textView == postCaption {
+
         if (text == " " || isBackSpace == -92) {
             let words = textView.text!.componentsSeparatedByString(" ")
             var temptags = [String()]
             for word in words {
+                
                 //if word.hasPrefix("#") {
                 var lookupword = word.stringByReplacingOccurrencesOfString("#", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                 let attributedLookupString = NSMutableAttributedString(string: lookupword)
                 lookupword = lookupword.lowercaseString
-
+                
                 if EmoticonLookup[lookupword] == nil {
                     if word.hasPrefix("#"){
                         temptags.append(word)
@@ -443,8 +672,15 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             tags = temptags
             self.displayedtags = tags
             textView.attributedText = attributedString
+            }
             
             //}
+        }
+        
+        if text == "\n"  // Recognizes enter key in keyboard
+        {
+            textView.resignFirstResponder()
+            return false
         }
         
         return true
@@ -483,6 +719,8 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             }
         })
         
+        
+        
         let dataProvider = GoogleDataProvider()
         let searchRadius: Double = 100
         var searchedTypes = ["restaurant"]
@@ -491,9 +729,12 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
         print(mypos)
         
+        
+        
         dataProvider.fetchPlacesNearCoordinate(mypos, radius:searchRadius, types: searchedTypes) { places in
             for place: GooglePlace in places {
                 print(place.name)
+                
                 
             }
         }
@@ -515,7 +756,10 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.9542116666667,-87.7055883333333&radius=100.0&rankby=distance&type=restaurant&key=AIzaSyBq2etZOLunPzzNt9rA52n3RKN-TKPLhec
         
         var temp = [String()]
+        var locationGPStemp = [CLLocation()]
         SearchResults.removeAll()
+        SearchLocations.removeAll()
+        SearchLocationNames.removeAll()
         GooglePlacesID.removeAll()
         temp.removeAll()
         
@@ -527,25 +771,36 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
                 
                 if let results = json["results"].array {
                     for result in results {
+                 
+                        //print(result)
                         if result["place_id"].string != nil {
                         if let placeIDs = result["place_id"].string{
                             if let names = result["name"].string{
-
+            
+                        var locationGPStempcreate = CLLocation(latitude: result["geometry"]["location"]["lat"].double!, longitude: result["geometry"]["location"]["lng"].double!)
+                        var locationAdress = result["vicinity"].string
+                                
+                                
                         GooglePlacesID[names] = placeIDs
-                        temp.append(names)
-                        }
+                        SearchResults.append(names)
+                        SearchLocations[names] = locationGPStempcreate
+                        SearchLocationNames[names] = locationAdress
                             }
                     }
                     }
                 }
             }
-            print(temp)
-            SearchResults = temp
+         //   print(temp)
+         //   print(locationGPStemp)
+         //   SearchResults = temp
+            
             self.placesCollectionView.reloadData()
+
             
         }
 
 
+    }
     }
     
     func displayLocationInfo(placemark: CLPlacemark?) {
@@ -559,6 +814,10 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
             let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
             
             print(containsPlacemark.name)
+            SelectedLocationName = containsPlacemark.name
+            SelectedLocationAdress = nil
+            
+            updateGPS()
             
            // self.PlaceName.text = containsPlacemark.name
             
@@ -592,6 +851,89 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
         
     }
 
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        
+        /*let customView = UIView(frame: CGRectMake(0, 0, 50, 50))
+         customView.backgroundColor = UIColor.whiteColor()
+         customView.tag = 1*/
+        
+        let p = gestureReconizer.locationInView(self.view)
+        let subViews = self.view.subviews
+        
+        // Use Recognized instead of Began
+        
+        if gestureReconizer.state != UIGestureRecognizerState.Recognized {
+            
+            if CGRectContainsPoint(self.emoticonView1.frame, p) {
+                selectedView = emoticonView1
+            }
+            
+            if CGRectContainsPoint(self.emoticonView2.frame, p) {
+                selectedView = emoticonView2
+            }
+            
+            if CGRectContainsPoint(self.emoticonView3.frame, p) {
+                selectedView = emoticonView3
+            }
+            
+            if CGRectContainsPoint(self.emoticonView4.frame, p) {
+                selectedView = emoticonView4
+            }
+            
+            let point = self.selectedView!.convertPoint(p, fromView:self.view)
+            let indexPath = self.selectedView!.indexPathForItemAtPoint(point)
+            
+            if let index = indexPath  {
+                
+                let cell = self.selectedView!.cellForItemAtIndexPath(index) as! RatingsViewCell
+                
+                var topright = CGPoint(x: cell.center.x + cell.bounds.size.width/2, y: cell.center.y - cell.bounds.size.height/2-25)
+                var converttopright = self.view.convertPoint(topright, fromView:self.selectedView!)
+                
+                var label = UILabel(frame: CGRectMake(converttopright.x, converttopright.y, 100, 25))
+                label.backgroundColor = UIColor.lightGrayColor()
+                label.layer.cornerRadius = 10
+                label.tag = 1
+                
+                self.view.addSubview(label)
+                
+                
+                // do stuff with your cell, for example print the indexPath
+                label.font = label.font.fontWithSize(15)
+                label.textColor = UIColor.whiteColor()
+                label.text = EmoticonDictionary[(cell.RatingButton.titleLabel?.text)!]
+                cell.RatingButton.alpha = 1
+                
+            } else {
+                print("Could not find index path")
+            }
+            
+        }
+         
+            
+        else if gestureReconizer.state != UIGestureRecognizerState.Changed {
+            for subview in subViews{
+                if (subview.tag == 1) {
+                    subview.removeFromSuperview()
+                }}
+            
+            let point = self.selectedView!.convertPoint(p, fromView:self.view)
+            let indexPath = self.selectedView!.indexPathForItemAtPoint(point)
+            
+            if let index = indexPath  {
+                
+                let cell = self.selectedView!.cellForItemAtIndexPath(index) as! RatingsViewCell
+                
+                cell.RatingButton.alpha = 0.3
+                
+            } else {
+                print("Could not find index path")
+            }
+            
+            return
+            
+        }
+    }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -709,11 +1051,60 @@ class UploadViewController: UIViewController, UITextViewDelegate, UIImagePickerC
     
     
     @IBAction func LocationPressed(sender: UIButton) {
-        locationLabel.text = sender.titleLabel?.text
-    
+        SelectedLocationName = sender.titleLabel?.text
+        SelectedImageGPS = SearchLocations[(sender.titleLabel?.text)!]
+        SelectedLocationAdress = SearchLocationNames[(sender.titleLabel?.text)!]
         
+        updateGPS()
+
     }
 
+    func singleTap(sender: JOEmojiableBtn) {
+        print("Single tap action")
+        
+        if sender.frame.origin.x < (UIScreen.mainScreen().bounds.width)/2
+        {
+            emoticonRating.image = UIImage(named: "B1")
+        }
+        
+        else if sender.frame.origin.x > (UIScreen.mainScreen().bounds.width)/2
+        {
+            emoticonRating.image = UIImage(named: "G1")
+        }
+        
+        self.ratingCancel.hidden = false
+        
+       // labelInfo.text = "Single tap action"
+    }
+
+    
+    func selectedOption(sender: JOEmojiableBtn, index: Int) {
+        print("Option \(index) selected")
+        emoticonRating.image = SelectionEmoticonImageData
+    }
+    
+    func canceledAction(sender: JOEmojiableBtn) {
+        print("User cancelled selection")
+       // labelInfo.text = "User cancelled selection"
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        CurrentLocation = locations[0]
+        print(CurrentLocation)
+        
+        if CurrentLocation != nil {
+            SelectedImageGPS = CLLocation(latitude: CurrentLocation!.coordinate.latitude, longitude: CurrentLocation!.coordinate.longitude)
+            reverseGPS(CurrentLocation!)
+            SelectedLocationName = nil
+            SelectedLocationAdress = nil
+            
+            updateGPS()
+            locationManager.stopUpdatingLocation()
+       
+        }
+
+    }
     
     
 }
